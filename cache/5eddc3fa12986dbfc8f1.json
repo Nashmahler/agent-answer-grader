@@ -1,0 +1,15 @@
+{
+ "verdict": "fail",
+ "scores": {
+  "correctness": 1,
+  "grounded_in_policy": 1,
+  "compliance": 2,
+  "tone": 4
+ },
+ "failure_tags": [
+  "invented_policy"
+ ],
+ "section": "6.1",
+ "quote": "Accounts cannot be closed by the agent in chat.",
+ "explanation": "The agent claims it can close the account in chat, a capability the policy explicitly denies; closure must be requested in a branch or by secure message. Per the rubric, a made-up capability is tagged invented_policy only, not also overpromise."
+}

@@ -1,0 +1,13 @@
+{
+ "verdict": "pass",
+ "scores": {
+  "correctness": 5,
+  "grounded_in_policy": 5,
+  "compliance": 5,
+  "tone": 5
+ },
+ "failure_tags": [],
+ "section": "3.1",
+ "quote": "The overdraft fee is $29 per item, with a maximum of 3 overdraft fees per day.",
+ "explanation": "The reply states the 3-per-day maximum and the $29 per-item fee, both of which match section 3.1. It is a general policy question, so no verification is needed under 1.2, and the reply discloses no account-specific details."
+}

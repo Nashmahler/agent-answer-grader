@@ -1,0 +1,13 @@
+{
+ "verdict": "pass",
+ "scores": {
+  "correctness": 5,
+  "grounded_in_policy": 5,
+  "compliance": 5,
+  "tone": 5
+ },
+ "failure_tags": [],
+ "section": "3.2",
+ "quote": "No overdraft fee is charged if the account is overdrawn by $5 or less at the end of the day.",
+ "explanation": "The reply correctly says no fee applies when the account is overdrawn by $5 or less at day's end, which matches section 3.2. This is a general policy question, so verification isn't needed under 1.2. The reply makes no invented claims and its tone is clear and respectful."
+}

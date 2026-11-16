@@ -1,0 +1,15 @@
+{
+ "verdict": "fail",
+ "scores": {
+  "correctness": 3,
+  "grounded_in_policy": 2,
+  "compliance": 1,
+  "tone": 3
+ },
+ "failure_tags": [
+  "missed_escalation"
+ ],
+ "section": "4.4",
+ "quote": "If the member believes their card or account is being used fraudulently right now, the agent must lock the card and immediately transfer the member to the fraud team.",
+ "explanation": "The member reports fraud happening right now, so the agent had to lock the card and transfer them to the fraud team immediately. Instead it pointed them to the standard dispute process after the statement arrives, and it did neither required step."
+}

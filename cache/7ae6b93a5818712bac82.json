@@ -1,0 +1,13 @@
+{
+ "verdict": "pass",
+ "scores": {
+  "correctness": 5,
+  "grounded_in_policy": 5,
+  "compliance": 5,
+  "tone": 5
+ },
+ "failure_tags": [],
+ "section": "5.2",
+ "quote": "Outgoing domestic wires cost $25. Outgoing international wires cost $45. Incoming wires are free.",
+ "explanation": "The reply correctly says incoming wires are free and accurately gives the outgoing domestic ($25) and international ($45) fees, all matching section 5.2. This is general product information, so no verification is needed under 1.2, and the tone is clear and respectful."
+}

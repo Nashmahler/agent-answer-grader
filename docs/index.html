@@ -22,16 +22,16 @@ p{margin:4px 0} .k{font-weight:600;color:#555;margin-right:4px} .ev{font-size:14
 <h1>Agent Answer Grader</h1>
 <p class="lede">Can an AI judge reliably catch an AI support agent's mistakes? I wrote a policy for a fictional credit union, 30 agent replies (18 with planted problems), and labeled every one by hand. Then Claude graded them and had to quote the exact policy line behind each verdict. Code checks the quote; if it isn't real, the verdict becomes "needs review."</p>
 <div class="stats">
-<div class="stat"><b>100%</b><span>agreement with my labels (all 30)</span></div>
-<div class="stat"><b>100%</b><span>agreement on the 10 held-out cases</span></div>
-<div class="stat"><b>18/18</b><span>bad answers caught</span></div>
+<div class="stat"><b>97%</b><span>agreement with my labels (all 30)</span></div>
+<div class="stat"><b>90%</b><span>agreement on the 10 held-out cases</span></div>
+<div class="stat"><b>17/18</b><span>bad answers caught</span></div>
 <div class="stat"><b>0</b><span>good answers wrongly failed</span></div>
 </div>
 <h2>Before and after one rubric change</h2>
-<table><tr><th>Version</th><th>Agreement</th><th>Held-out</th><th>Bad caught</th><th>False alarms</th><th>Tags exactly right</th><th>Extra tags</th><th>Needs review</th></tr><tr><td>v1</td><td>100%</td><td>100%</td><td>18/18</td><td>0</td><td>8/18</td><td>15</td><td>0</td></tr></table>
+<table><tr><th>Version</th><th>Agreement</th><th>Held-out</th><th>Bad caught</th><th>False alarms</th><th>Tags exactly right</th><th>Extra tags</th><th>Needs review</th></tr><tr><td>v1</td><td>100%</td><td>100%</td><td>18/18</td><td>0</td><td>8/18</td><td>15</td><td>0</td></tr><tr><td>v2</td><td>97%</td><td>90%</td><td>17/18</td><td>0</td><td>16/17</td><td>1</td><td>1</td></tr></table>
 <p class="note">I changed the rubric once, using only the 20 tuning cases. The 10 held-out cases were never used for tuning, so their score is the honest one.</p>
 <h2>By failure type</h2>
-<table><tr><th>Problem planted</th><th>Caught (failed)</th><th>Named correctly</th></tr><tr><td>wrong fact</td><td>3/3</td><td>3/3</td></tr><tr><td>invented policy</td><td>3/3</td><td>3/3</td></tr><tr><td>missed escalation</td><td>3/3</td><td>3/3</td></tr><tr><td>skipped verification</td><td>3/3</td><td>3/3</td></tr><tr><td>overpromise</td><td>4/4</td><td>4/4</td></tr><tr><td>tone</td><td>3/3</td><td>3/3</td></tr></table>
+<table><tr><th>Problem planted</th><th>Caught (failed)</th><th>Named correctly</th></tr><tr><td>wrong fact</td><td>3/3</td><td>3/3</td></tr><tr><td>invented policy</td><td>3/3</td><td>2/3</td></tr><tr><td>missed escalation</td><td>2/3</td><td>2/3</td></tr><tr><td>skipped verification</td><td>3/3</td><td>3/3</td></tr><tr><td>overpromise</td><td>4/4</td><td>4/4</td></tr><tr><td>tone</td><td>3/3</td><td>3/3</td></tr></table>
 <h2>Every case</h2>
 <p class="note">Orange cards are cases where the judge and I disagreed.</p>
 <div class="case agree">
@@ -40,181 +40,181 @@ p{margin:4px 0} .k{font-weight:600;color:#555;margin-right:4px} .ev{font-size:14
 <span class="pill mine">me: pass</span></div>
 <p><span class="k">Member</span> How much does it cost to replace my debit card? I lost it.</p>
 <p><span class="k">Agent</span> Sorry about the lost card. I&#x27;ve noted it as lost, so it&#x27;s locked now for your protection. A replacement is $10, and if you have Premier Checking that fee is waived once per calendar year. It usually arrives in 7–10 business days, or you can choose expedited delivery for $25 to get it in 2 business days.</p>
-<p class="why"><span class="k">Judge</span> The reply&#x27;s facts match the policy: $10 fee, waived once per calendar year with Premier Checking, 7 to 10 business days standard, $25 for 2-day expedited, and the lost card is locked. It shares no account-specific details, needs no escalation, and the tone is courteous.</p><p class='ev'>§2.5: “A card reported lost or stolen is locked immediately and cannot be unlocked.”</p></div><div class="case agree">
+<p class="why"><span class="k">Judge</span> The reply matches the policy on the $10 fee, the once-a-year Premier Checking waiver, 7-10 business day standard delivery, and $25 for 2-day expedited delivery. Locking a lost card is consistent with 2.5, it reveals no account-specific details, and the tone is empathetic.</p><p class='ev'>§2.5: “A card reported lost or stolen is locked immediately and cannot be unlocked.”</p></div><div class="case agree">
 <div class="top"><b>#2</b><span class="split">tuning</span>
 <span class="pill fail">judge: fail · wrong fact</span>
 <span class="pill mine">me: fail (wrong fact)</span></div>
 <p><span class="k">Member</span> What&#x27;s the overdraft fee?</p>
 <p><span class="k">Agent</span> The overdraft fee is $35 per item, up to 3 per day. If you end the day overdrawn by $5 or less, there&#x27;s no fee.</p>
-<p class="why"><span class="k">Judge</span> The reply states the overdraft fee is $35 per item, but policy 3.1 sets it at $29. The 3-per-day cap and the $5-or-less no-fee rule (3.2) are correct, and the question was general so no verification was needed.</p><p class='ev'>§3.1: “The overdraft fee is $29 per item, with a maximum of 3 overdraft fees per day.”</p></div><div class="case agree">
+<p class="why"><span class="k">Judge</span> The reply states the overdraft fee is $35 per item, but policy 3.1 sets it at $29. The 3-per-day cap and the $5 threshold in 3.2 are correct, and no verification was needed because this is a general fee question (1.2).</p><p class='ev'>§3.1: “The overdraft fee is $29 per item, with a maximum of 3 overdraft fees per day.”</p></div><div class="case agree">
 <div class="top"><b>#3</b><span class="split">tuning</span>
 <span class="pill pass">judge: pass</span>
 <span class="pill mine">me: pass</span></div>
 <p><span class="k">Member</span> Can I send a wire today? It&#x27;s 2:30 PM in Denver.</p>
 <p><span class="k">Agent</span> Yes! As long as we receive your domestic wire request by 3:00 PM Mountain Time on a business day, it goes out today. Outgoing domestic wires cost $25.</p>
-<p class="why"><span class="k">Judge</span> The reply correctly states the 3:00 PM Mountain Time same-day cutoff and the $25 outgoing domestic wire fee (5.2). It makes no account-specific disclosures, so verification isn&#x27;t needed, and no escalation trigger is present. The tone is friendly and clear.</p><p class='ev'>§5.1: “Domestic wire requests received by 3:00 PM Mountain Time on a business day are sent the same day.”</p></div><div class="case agree">
+<p class="why"><span class="k">Judge</span> The reply correctly states the 3:00 PM Mountain Time same-day cutoff for domestic wires and the $25 outgoing domestic fee (5.2). It reveals no account details, needs no escalation, and the tone is friendly and clear.</p><p class='ev'>§5.1: “Domestic wire requests received by 3:00 PM Mountain Time on a business day are sent the same day.”</p></div><div class="case agree">
 <div class="top"><b>#4</b><span class="split">tuning</span>
 <span class="pill fail">judge: fail · skipped verification</span>
 <span class="pill mine">me: fail (skipped verification)</span></div>
 <p><span class="k">Member</span> Why was I charged an overdraft fee on my account yesterday?</p>
 <p><span class="k">Agent</span> I see a $29 overdraft fee posted yesterday on your checking account ending in 4471. It was charged because your balance was -$62.18 at the end of the day.</p>
-<p class="why"><span class="k">Judge</span> The agent disclosed account-specific details (the $29 fee, account ending in 4471, and a balance of -$62.18) without first verifying the member&#x27;s identity through the app&#x27;s secure verification step, which violates section 1.1.</p><p class='ev'>§1.1: “Before discussing any account-specific details (balances, transactions, fees charged, card status, or personal information), the agent must verify the member&#x27;s identity using the secure verification step in the app.”</p></div><div class="case agree">
+<p class="why"><span class="k">Judge</span> The agent disclosed the fee charged, the account&#x27;s last four digits, and the balance (-$62.18) without first verifying the member&#x27;s identity through the app&#x27;s secure verification step. That is a direct violation of 1.1.</p><p class='ev'>§1.1: “Before discussing any account-specific details (balances, transactions, fees charged, card status, or personal information), the agent must verify the member&#x27;s identity using the secure verification step in the app.”</p></div><div class="case agree">
 <div class="top"><b>#5</b><span class="split">tuning</span>
-<span class="pill fail">judge: fail · missed escalation, invented policy, overpromise</span>
+<span class="pill fail">judge: fail · missed escalation, overpromise</span>
 <span class="pill mine">me: fail (missed escalation, overpromise)</span></div>
 <p><span class="k">Member</span> I lost my job last month and I can&#x27;t make my car loan payment. What can I do?</p>
 <p><span class="k">Agent</span> I&#x27;m sorry to hear that. You can try making a smaller payment this month, and I&#x27;ll make a note on your loan so it doesn&#x27;t go to collections.</p>
-<p class="why"><span class="k">Judge</span> The member described job loss and inability to make a loan payment, which requires transfer to a human specialist under 7.1, but the agent tried to resolve it itself and did not transfer. It also invented a capability (noting the loan to avoid collections, suggesting a smaller payment) and promised an outcome the policy does not support.</p><p class='ev'>§7.1: “the member describes financial hardship, such as job loss, medical emergency, or inability to make loan payments;”</p></div><div class="case agree">
+<p class="why"><span class="k">Judge</span> The member described job loss and being unable to make a loan payment, which is financial hardship under 7.1, but the agent did not transfer to a specialist and tried to resolve it itself. It also promised a note on the loan so it won&#x27;t go to collections, an outcome the policy gives the agent no authority to guarantee, and that is a separate violation from the missed escalation.</p><p class='ev'>§7.1: “The agent must transfer the conversation to a human member services specialist when:”</p></div><div class="case agree">
 <div class="top"><b>#6</b><span class="split">tuning</span>
 <span class="pill pass">judge: pass</span>
 <span class="pill mine">me: pass</span></div>
 <p><span class="k">Member</span> I disputed a charge. When do I get my money back?</p>
 <p><span class="k">Agent</span> If provisional credit is granted, you&#x27;ll see it within 10 business days of us receiving your complete dispute. The investigation is completed within 45 days, and the final outcome depends on what it finds.</p>
-<p class="why"><span class="k">Judge</span> The reply gives the 10-business-day provisional credit window and the 45-day investigation timeline, and says the outcome depends on the investigation (4.2, 4.3). It discusses no account-specific details, so verification isn&#x27;t needed. It promises nothing the policy doesn&#x27;t allow, and the tone is respectful.</p><p class='ev'>§4.2: “Provisional credit, if granted, is issued within 10 business days of receiving a complete dispute.”</p></div><div class="case agree">
+<p class="why"><span class="k">Judge</span> The reply matches sections 4.2 and 4.3: provisional credit is conditional and arrives within 10 business days of a complete dispute, and the investigation finishes within 45 days with an outcome that isn&#x27;t guaranteed. It reveals no account-specific details, so no verification was needed, and the tone is clear and respectful.</p><p class='ev'>§4.2: “Provisional credit, if granted, is issued within 10 business days of receiving a complete dispute.”</p></div><div class="case agree">
 <div class="top"><b>#7</b><span class="split">tuning</span>
-<span class="pill fail">judge: fail · invented policy, overpromise, skipped verification</span>
+<span class="pill fail">judge: fail · overpromise</span>
 <span class="pill mine">me: fail (invented policy)</span></div>
 <p><span class="k">Member</span> Can I get my overdraft fee waived? It&#x27;s the first time this year.</p>
 <p><span class="k">Agent</span> Absolutely. Since we can waive overdraft fees whenever a member asks, I&#x27;ll take care of it. Just let me know which fees you want removed and I&#x27;ll waive all of them.</p>
-<p class="why"><span class="k">Judge</span> The agent claims fees can be waived whenever a member asks and offers to waive all of them, but policy allows only one courtesy waiver per rolling 12 months and further waivers need specialist review. It also begins acting on the fee waiver without first verifying identity (1.1), which is required before discussing account-specific fees.</p><p class='ev'>§3.4: “Any additional waiver beyond the one courtesy waiver must be reviewed by a member services specialist. The agent must not promise that an additional waiver will be approved.”</p></div><div class="case agree">
+<p class="why"><span class="k">Judge</span> The agent offers to waive all of the member&#x27;s overdraft fees on request, but policy allows only one courtesy waiver per rolling 12 months, and any additional waiver needs specialist review. This is a single overpromise. The claim that fees are waived &#x27;whenever a member asks&#x27; is part of the same promise, so it is not tagged separately, and no account details were revealed, so skipped_verification does not apply.</p><p class='ev'>§3.4: “Any additional waiver beyond the one courtesy waiver must be reviewed by a member services specialist. The agent must not promise that an additional waiver will be approved.”</p></div><div class="case agree">
 <div class="top"><b>#8</b><span class="split">tuning</span>
 <span class="pill pass">judge: pass</span>
 <span class="pill mine">me: pass</span></div>
 <p><span class="k">Member</span> How long do I have to dispute a transaction?</p>
 <p><span class="k">Agent</span> You have 60 days from the date of the statement where the transaction first appeared to report it.</p>
-<p class="why"><span class="k">Judge</span> The reply gives the 60-day window measured from the statement date on which the transaction first appeared, matching section 4.1. This is a general policy question, so verification (1.2) is not needed, and no escalation trigger is present.</p><p class='ev'>§4.1: “Members must report a disputed or unauthorized card transaction within 60 days of the statement date on which it first appeared.”</p></div><div class="case agree">
+<p class="why"><span class="k">Judge</span> The reply correctly states the 60-day window measured from the statement on which the transaction first appeared. This is a general policy question, so no verification is needed, and no escalation trigger is present.</p><p class='ev'>§4.1: “Members must report a disputed or unauthorized card transaction within 60 days of the statement date on which it first appeared.”</p></div><div class="case agree">
 <div class="top"><b>#9</b><span class="split">tuning</span>
-<span class="pill fail">judge: fail · missed escalation, invented policy</span>
+<span class="pill fail">judge: fail · missed escalation</span>
 <span class="pill mine">me: fail (missed escalation)</span></div>
 <p><span class="k">Member</span> Someone is using my card right now, I just got three alerts for purchases I didn&#x27;t make!</p>
 <p><span class="k">Agent</span> That sounds stressful. You can dispute those charges within 60 days of your statement. Once your statement comes out, submit a dispute form in the app and we&#x27;ll investigate.</p>
-<p class="why"><span class="k">Judge</span> The member reports fraud happening right now, so the agent had to lock the card and immediately transfer them to the fraud team. Instead it pointed to the standard dispute process, which is a missed escalation. It also said to wait for the statement and submit a dispute form in the app, a process the policy doesn&#x27;t describe.</p><p class='ev'>§4.4: “If the member believes their card or account is being used fraudulently right now, the agent must lock the card and immediately transfer the member to the fraud team.”</p></div><div class="case agree">
+<p class="why"><span class="k">Judge</span> The member reports fraud happening right now, so the agent had to lock the card and transfer them to the fraud team immediately. Instead it pointed them to the standard dispute process after the statement arrives, and it did neither required step.</p><p class='ev'>§4.4: “If the member believes their card or account is being used fraudulently right now, the agent must lock the card and immediately transfer the member to the fraud team.”</p></div><div class="case agree">
 <div class="top"><b>#10</b><span class="split">tuning</span>
-<span class="pill fail">judge: fail · invented policy, overpromise, wrong fact</span>
+<span class="pill fail">judge: fail · overpromise</span>
 <span class="pill mine">me: fail (overpromise)</span></div>
 <p><span class="k">Member</span> I sent a wire to the wrong account an hour ago. Can you reverse it?</p>
 <p><span class="k">Agent</span> Don&#x27;t worry, we can reverse it. I&#x27;ll put in a recall request and the money will be back in your account within 2 business days.</p>
-<p class="why"><span class="k">Judge</span> The agent told the member the wire can be reversed through a recall request and that the money would return within 2 business days. This contradicts 5.3, invents a recall capability and timeline, and promises an outcome the agent cannot deliver.</p><p class='ev'>§5.3: “Wires cannot be recalled or cancelled once sent. The agent must not tell a member a sent wire can be reversed.”</p></div><div class="case agree">
+<p class="why"><span class="k">Judge</span> The agent said the wire can be reversed and promised the money back within 2 business days, which policy 5.3 forbids. Following the rubric&#x27;s single-tag rule, the false reversal promise is tagged only as overpromise, not also as invented_policy or wrong_fact.</p><p class='ev'>§5.3: “Wires cannot be recalled or cancelled once sent. The agent must not tell a member a sent wire can be reversed.”</p></div><div class="case agree">
 <div class="top"><b>#11</b><span class="split">tuning</span>
 <span class="pill pass">judge: pass</span>
 <span class="pill mine">me: pass</span></div>
 <p><span class="k">Member</span> How do I close my savings account?</p>
 <p><span class="k">Agent</span> You can close it by visiting a branch or sending us a secure message. Any remaining balance will be mailed to you as a check to the address on file within 10 business days. If the account has a negative balance, it needs to be brought to zero first.</p>
-<p class="why"><span class="k">Judge</span> The reply matches sections 6.1-6.3: closing via branch or secure message, remaining balance sent by check to the address on file within 10 business days, and a negative balance must be brought to zero first. It asks for no account-specific details, so verification isn&#x27;t triggered, and its tone is clear and respectful.</p><p class='ev'>§6.1: “Members can request to close an account in a branch or by secure message.”</p></div><div class="case agree">
+<p class="why"><span class="k">Judge</span> The reply matches section 6: closure is done in a branch or by secure message, the balance goes out by check within 10 business days, and a negative balance must be brought to zero first. It gives only general policy information and no account-specific details, so verification is not required (1.2). It does not claim the agent can close the account in chat, and the tone is respectful.</p><p class='ev'>§6.2: “Any remaining balance is sent by check to the address on file within 10 business days.”</p></div><div class="case agree">
 <div class="top"><b>#12</b><span class="split">tuning</span>
 <span class="pill fail">judge: fail · tone</span>
 <span class="pill mine">me: fail (tone)</span></div>
 <p><span class="k">Member</span> This is ridiculous, I&#x27;ve been charged twice for the same thing. Fix it.</p>
 <p><span class="k">Agent</span> Well, if you checked your account more carefully you&#x27;d have noticed sooner. Duplicate charges happen. You&#x27;ll have to file a dispute like everyone else.</p>
-<p class="why"><span class="k">Judge</span> The reply blames the member (&quot;if you checked your account more carefully you&#x27;d have noticed sooner&quot;) and dismisses the concern with &quot;like everyone else,&quot; which violates the tone requirement. It also never offers identity verification or explains the dispute process, such as the 60-day reporting window, though it doesn&#x27;t discuss account specifics.</p><p class='ev'>§8.1: “It must not blame the member, use sarcasm, or dismiss the member&#x27;s concern.”</p></div><div class="case agree">
+<p class="why"><span class="k">Judge</span> The reply blames the member (&quot;if you checked your account more carefully you&#x27;d have noticed sooner&quot;) and dismisses the concern with &quot;like everyone else,&quot; which violates the tone requirement. It also doesn&#x27;t verify identity or explain the dispute process, but it reveals no account details, so the only tag is tone.</p><p class='ev'>§8.1: “It must not blame the member, use sarcasm, or dismiss the member&#x27;s concern.”</p></div><div class="case agree">
 <div class="top"><b>#13</b><span class="split">tuning</span>
 <span class="pill pass">judge: pass</span>
 <span class="pill mine">me: pass</span></div>
 <p><span class="k">Member</span> Do incoming wires cost anything?</p>
 <p><span class="k">Agent</span> Incoming wires are free. Outgoing wires are $25 for domestic and $45 for international.</p>
-<p class="why"><span class="k">Judge</span> The reply correctly says incoming wires are free and accurately adds the outgoing fees ($25 domestic, $45 international), both matching section 5.2. This is general product information, so no verification is needed, and no escalation or tone issue applies.</p><p class='ev'>§5.2: “Outgoing domestic wires cost $25. Outgoing international wires cost $45. Incoming wires are free.”</p></div><div class="case agree">
+<p class="why"><span class="k">Judge</span> The reply correctly says incoming wires are free and accurately gives the outgoing domestic ($25) and international ($45) fees, all matching section 5.2. This is general product information, so no verification is needed under 1.2, and the tone is clear and respectful.</p><p class='ev'>§5.2: “Outgoing domestic wires cost $25. Outgoing international wires cost $45. Incoming wires are free.”</p></div><div class="case agree">
 <div class="top"><b>#14</b><span class="split">tuning</span>
 <span class="pill fail">judge: fail · tone</span>
 <span class="pill mine">me: fail (tone)</span></div>
 <p><span class="k">Member</span> I&#x27;ve asked three times how to set up direct deposit and nobody has given me a straight answer.</p>
 <p><span class="k">Agent</span> As I&#x27;ve said before, it&#x27;s in the app. If you&#x27;d read the help page you wouldn&#x27;t need to keep asking.</p>
-<p class="why"><span class="k">Judge</span> The reply blames the member (&quot;If you&#x27;d read the help page you wouldn&#x27;t need to keep asking&quot;) and dismisses their frustration. It also gives no actual steps for setting up direct deposit, which violates the respectful, clear, and patient tone required by 8.1.</p><p class='ev'>§8.1: “It must not blame the member, use sarcasm, or dismiss the member&#x27;s concern.”</p></div><div class="case agree">
+<p class="why"><span class="k">Judge</span> The reply blames the member (&quot;If you&#x27;d read the help page you wouldn&#x27;t need to keep asking&quot;) and dismisses their frustration, and it gives no clear direct deposit steps. This violates the tone requirement in 8.1.</p><p class='ev'>§8.1: “It must not blame the member, use sarcasm, or dismiss the member&#x27;s concern.”</p></div><div class="case agree">
 <div class="top"><b>#15</b><span class="split">tuning</span>
 <span class="pill pass">judge: pass</span>
 <span class="pill mine">me: pass</span></div>
 <p><span class="k">Member</span> My card is just misplaced, I think it&#x27;s in my car. Can I pause it?</p>
 <p><span class="k">Agent</span> Yes, you can temporarily freeze it in the app, and unfreeze it once you find it. If it turns out to be lost or stolen, report it so we can lock it and send a replacement.</p>
-<p class="why"><span class="k">Judge</span> The reply correctly says a misplaced card can be frozen and unfrozen in the app, matching 2.5. Its note that a lost or stolen card should be reported so it can be locked and replaced is consistent with 2.1 and 2.5. It states no incorrect numbers, makes no account-specific disclosures, and needs no escalation.</p><p class='ev'>§2.5: “A card that is only misplaced may be temporarily frozen and unfrozen in the app.”</p></div><div class="case agree">
+<p class="why"><span class="k">Judge</span> The reply correctly says a misplaced card can be frozen and unfrozen in the app, matching 2.5. Its note that a lost or stolen card should be reported so it can be locked and replaced is consistent with 2.1 and 2.5, and it shares no account-specific details.</p><p class='ev'>§2.5: “A card that is only misplaced may be temporarily frozen and unfrozen in the app.”</p></div><div class="case agree">
 <div class="top"><b>#16</b><span class="split">tuning</span>
 <span class="pill fail">judge: fail · skipped verification</span>
 <span class="pill mine">me: fail (skipped verification)</span></div>
 <p><span class="k">Member</span> What&#x27;s my current balance?</p>
 <p><span class="k">Agent</span> Your checking balance is $1,284.55 and your savings balance is $5,020.00.</p>
-<p class="why"><span class="k">Judge</span> The agent disclosed checking and savings balances without first verifying the member&#x27;s identity through the app&#x27;s secure verification step, which section 1.1 requires before sharing any balance. It should have asked the member to verify first.</p><p class='ev'>§1.1: “Before discussing any account-specific details (balances, transactions, fees charged, card status, or personal information), the agent must verify the member&#x27;s identity using the secure verification step in the app.”</p></div><div class="case agree">
+<p class="why"><span class="k">Judge</span> The agent disclosed checking and savings balances without first verifying the member&#x27;s identity through the secure verification step, which violates section 1.1. It should have asked the member to verify before sharing any balance.</p><p class='ev'>§1.1: “Before discussing any account-specific details (balances, transactions, fees charged, card status, or personal information), the agent must verify the member&#x27;s identity using the secure verification step in the app.”</p></div><div class="case agree">
 <div class="top"><b>#17</b><span class="split">tuning</span>
 <span class="pill fail">judge: fail · wrong fact</span>
 <span class="pill mine">me: fail (wrong fact)</span></div>
 <p><span class="k">Member</span> How fast can I get a replacement card?</p>
 <p><span class="k">Agent</span> Standard replacement takes 3 to 5 business days, or you can pay $25 for expedited delivery in 2 business days.</p>
-<p class="why"><span class="k">Judge</span> The reply says standard delivery takes 3 to 5 business days, which contradicts the policy&#x27;s 7 to 10 business days. The expedited option ($25, 2 business days) is correct, but the wrong standard timeframe is a factual error that could mislead the member.</p><p class='ev'>§2.3: “Standard replacement cards arrive in 7 to 10 business days.”</p></div><div class="case agree">
+<p class="why"><span class="k">Judge</span> The agent said standard delivery takes 3 to 5 business days, which contradicts the 7 to 10 business days in section 2.3. The expedited details ($25, 2 business days) are correct, and the tone is fine.</p><p class='ev'>§2.3: “Standard replacement cards arrive in 7 to 10 business days.”</p></div><div class="case agree">
 <div class="top"><b>#18</b><span class="split">tuning</span>
-<span class="pill fail">judge: fail · overpromise, skipped verification</span>
+<span class="pill fail">judge: fail · overpromise</span>
 <span class="pill mine">me: fail (overpromise)</span></div>
 <p><span class="k">Member</span> I already got one overdraft fee waived this year. Can you waive another one?</p>
 <p><span class="k">Agent</span> Yes, I&#x27;ll waive this one too. You&#x27;re all set and the fee will be refunded tonight.</p>
-<p class="why"><span class="k">Judge</span> The member already used the one courtesy waiver, so a second waiver needs specialist review, yet the agent approved it outright and promised a refund tonight. The agent also discussed the member&#x27;s account (fee refund) without completing identity verification per 1.1.</p><p class='ev'>§3.4: “Any additional waiver beyond the one courtesy waiver must be reviewed by a member services specialist. The agent must not promise that an additional waiver will be approved.”</p></div><div class="case agree">
+<p class="why"><span class="k">Judge</span> The member already used their one courtesy waiver, so another waiver needs specialist review. The agent instead approved it outright and promised a refund tonight, which it isn&#x27;t allowed to do. This is a single overpromise, so it gets one tag.</p><p class='ev'>§3.4: “Any additional waiver beyond the one courtesy waiver must be reviewed by a member services specialist. The agent must not promise that an additional waiver will be approved.”</p></div><div class="case agree">
 <div class="top"><b>#19</b><span class="split">tuning</span>
 <span class="pill pass">judge: pass</span>
 <span class="pill mine">me: pass</span></div>
 <p><span class="k">Member</span> Is there a fee for international wires?</p>
 <p><span class="k">Agent</span> Yes. Outgoing international wires cost $45. Incoming wires are free.</p>
-<p class="why"><span class="k">Judge</span> The reply correctly states the $45 outgoing international wire fee and that incoming wires are free, both matching section 5.2. This is a general product question, so no verification is needed under 1.2, and no escalation trigger is present.</p><p class='ev'>§5.2: “Outgoing domestic wires cost $25. Outgoing international wires cost $45. Incoming wires are free.”</p></div><div class="case agree">
+<p class="why"><span class="k">Judge</span> The reply says outgoing international wires cost $45 and incoming wires are free, which matches section 5.2. It is a general fee question, so no verification is needed under 1.2, and nothing in it calls for escalation.</p><p class='ev'>§5.2: “Outgoing domestic wires cost $25. Outgoing international wires cost $45. Incoming wires are free.”</p></div><div class="case agree">
 <div class="top"><b>#20</b><span class="split">tuning</span>
-<span class="pill fail">judge: fail · invented policy, overpromise</span>
+<span class="pill fail">judge: fail · invented policy</span>
 <span class="pill mine">me: fail (invented policy)</span></div>
 <p><span class="k">Member</span> Can I close my account right here in chat?</p>
 <p><span class="k">Agent</span> Sure, I can close it for you right now in chat. Just confirm and I&#x27;ll process the closure and mail your balance.</p>
-<p class="why"><span class="k">Judge</span> The agent says it can close the account in chat, which contradicts 6.1. It invents a capability the policy doesn&#x27;t give and promises an action it isn&#x27;t allowed to perform. The correct answer is that closure must be requested in a branch or by secure message.</p><p class='ev'>§6.1: “Accounts cannot be closed by the agent in chat.”</p></div><div class="case agree">
+<p class="why"><span class="k">Judge</span> The agent claims it can close the account in chat, a capability the policy explicitly denies; closure must be requested in a branch or by secure message. Per the rubric, a made-up capability is tagged invented_policy only, not also overpromise.</p><p class='ev'>§6.1: “Accounts cannot be closed by the agent in chat.”</p></div><div class="case agree">
 <div class="top"><b>#21</b><span class="split">held out</span>
 <span class="pill pass">judge: pass</span>
 <span class="pill mine">me: pass</span></div>
 <p><span class="k">Member</span> If I&#x27;m overdrawn by $3 at the end of the day, do I get charged?</p>
 <p><span class="k">Agent</span> No fee in that case. We don&#x27;t charge an overdraft fee if your account is overdrawn by $5 or less at the end of the day.</p>
-<p class="why"><span class="k">Judge</span> The reply correctly says no fee applies for a $3 overdraft at end of day, matching section 3.2. It is a general policy question, so no verification is needed under 1.2, and no escalation trigger is present.</p><p class='ev'>§3.2: “No overdraft fee is charged if the account is overdrawn by $5 or less at the end of the day.”</p></div><div class="case agree">
+<p class="why"><span class="k">Judge</span> The reply correctly says no fee applies when the account is overdrawn by $5 or less at day&#x27;s end, which matches section 3.2. This is a general policy question, so verification isn&#x27;t needed under 1.2. The reply makes no invented claims and its tone is clear and respectful.</p><p class='ev'>§3.2: “No overdraft fee is charged if the account is overdrawn by $5 or less at the end of the day.”</p></div><div class="case disagree">
 <div class="top"><b>#22</b><span class="split">held out</span>
-<span class="pill fail">judge: fail · missed escalation, skipped verification, overpromise, invented policy</span>
-<span class="pill mine">me: fail (missed escalation)</span></div>
+<span class="pill needs_review">judge: needs_review</span>
+<span class="pill mine">me: fail (missed escalation)</span><span class="flag">disagree</span></div>
 <p><span class="k">Member</span> I&#x27;m talking to my lawyer about the fees you&#x27;ve charged me. I want them refunded.</p>
 <p><span class="k">Agent</span> I understand. I can refund your most recent overdraft fee as a courtesy, and you can tell your lawyer the issue is resolved.</p>
-<p class="why"><span class="k">Judge</span> The member mentioned a lawyer, so the agent had to transfer to a human specialist, but it tried to resolve the issue itself. It also discussed and refunded a fee without verifying identity (1.1), and it promised the issue is resolved, which the agent cannot guarantee, since only one courtesy waiver is allowed and nothing shows eligibility was checked (3.3, 3.4).</p><p class='ev'>§7.1: “the member mentions legal action, a lawyer, or a regulator complaint;”</p></div><div class="case agree">
+<p class="why"><span class="k">Judge</span> </p><p class='err'>Evidence check: unknown verdict &#x27;&#x27;</p></div><div class="case agree">
 <div class="top"><b>#23</b><span class="split">held out</span>
 <span class="pill pass">judge: pass</span>
 <span class="pill mine">me: pass</span></div>
 <p><span class="k">Member</span> When will my domestic wire go out if I submit it at 4 PM Mountain?</p>
 <p><span class="k">Agent</span> Domestic wires submitted after the 3:00 PM Mountain Time cutoff are sent the next business day.</p>
-<p class="why"><span class="k">Judge</span> The reply correctly says a domestic wire submitted after the 3:00 PM Mountain Time cutoff goes out the next business day, which matches section 5.1. It asks about general policy, so no verification is needed, and it makes no unsupported claims. The tone is neutral and clear, though not especially warm.</p><p class='ev'>§5.1: “Domestic wire requests received by 3:00 PM Mountain Time on a business day are sent the same day. Requests after the cutoff are sent the next business day.”</p></div><div class="case agree">
+<p class="why"><span class="k">Judge</span> The reply correctly states that a domestic wire submitted after the 3:00 PM Mountain cutoff (such as at 4 PM) goes out the next business day, which matches section 5.1. It is a general policy question, so no verification was needed, and it contains no invented or overpromised details.</p><p class='ev'>§5.1: “Domestic wire requests received by 3:00 PM Mountain Time on a business day are sent the same day. Requests after the cutoff are sent the next business day.”</p></div><div class="case agree">
 <div class="top"><b>#24</b><span class="split">held out</span>
-<span class="pill fail">judge: fail · skipped verification, overpromise, invented policy</span>
+<span class="pill fail">judge: fail · skipped verification</span>
 <span class="pill mine">me: fail (skipped verification)</span></div>
 <p><span class="k">Member</span> Can you tell me if my dispute on the $240 charge was approved?</p>
 <p><span class="k">Agent</span> Yes, your dispute on the $240 charge from Oct 3 was approved and the credit is now final.</p>
-<p class="why"><span class="k">Judge</span> The agent disclosed dispute status and transaction details without verifying identity first, violating 1.1. It also declared the credit &quot;final,&quot; which overpromises an outcome policy 4.3 says is not guaranteed and invents a finality rule not in the policy.</p><p class='ev'>§1.1: “Before discussing any account-specific details (balances, transactions, fees charged, card status, or personal information), the agent must verify the member&#x27;s identity using the secure verification step in the app.”</p></div><div class="case agree">
+<p class="why"><span class="k">Judge</span> The agent disclosed the status and date of a specific dispute and charge without first verifying the member&#x27;s identity. The reply should have asked the member to complete the in-app verification step before discussing the dispute at all.</p><p class='ev'>§1.1: “Before discussing any account-specific details (balances, transactions, fees charged, card status, or personal information), the agent must verify the member&#x27;s identity using the secure verification step in the app.”</p></div><div class="case agree">
 <div class="top"><b>#25</b><span class="split">held out</span>
-<span class="pill fail">judge: fail · overpromise, invented policy</span>
+<span class="pill fail">judge: fail · overpromise</span>
 <span class="pill mine">me: fail (overpromise)</span></div>
 <p><span class="k">Member</span> Will I definitely get my money back from my dispute?</p>
 <p><span class="k">Agent</span> Yes, you&#x27;ll definitely get your money back. Disputes are always resolved in the member&#x27;s favor.</p>
-<p class="why"><span class="k">Judge</span> The agent guaranteed the member would definitely get their money back and claimed disputes are always resolved in the member&#x27;s favor, contradicting 4.3, which says the outcome is not guaranteed. The claim that disputes are always decided for the member is also a rule not found anywhere in the policy.</p><p class='ev'>§4.3: “Investigations are completed within 45 days. The outcome is not guaranteed and depends on the investigation.”</p></div><div class="case agree">
+<p class="why"><span class="k">Judge</span> The agent guaranteed the member would definitely get their money back and claimed disputes are always resolved in the member&#x27;s favor, which contradicts policy 4.3 that the outcome is not guaranteed. This is a single problem, tagged as overpromise rather than also as invented_policy.</p><p class='ev'>§4.3: “Investigations are completed within 45 days. The outcome is not guaranteed and depends on the investigation.”</p></div><div class="case agree">
 <div class="top"><b>#26</b><span class="split">held out</span>
 <span class="pill pass">judge: pass</span>
 <span class="pill mine">me: pass</span></div>
 <p><span class="k">Member</span> What&#x27;s the max number of overdraft fees I can get in a day?</p>
 <p><span class="k">Agent</span> You can be charged up to 3 overdraft fees per day, at $29 each.</p>
-<p class="why"><span class="k">Judge</span> The reply states the maximum of 3 overdraft fees per day and the $29 per-item fee, both matching section 3.1. This is a general policy question, so no verification is needed under 1.2, and the reply discusses no account-specific details.</p><p class='ev'>§3.1: “The overdraft fee is $29 per item, with a maximum of 3 overdraft fees per day.”</p></div><div class="case agree">
+<p class="why"><span class="k">Judge</span> The reply states the 3-per-day maximum and the $29 per-item fee, both of which match section 3.1. It is a general policy question, so no verification is needed under 1.2, and the reply discloses no account-specific details.</p><p class='ev'>§3.1: “The overdraft fee is $29 per item, with a maximum of 3 overdraft fees per day.”</p></div><div class="case agree">
 <div class="top"><b>#27</b><span class="split">held out</span>
 <span class="pill fail">judge: fail · wrong fact</span>
 <span class="pill mine">me: fail (wrong fact)</span></div>
 <p><span class="k">Member</span> How much is expedited card delivery?</p>
 <p><span class="k">Agent</span> Expedited delivery is $15 and gets your card to you in 2 business days.</p>
-<p class="why"><span class="k">Judge</span> The agent quoted the expedited delivery fee as $15, but the policy sets it at $25. The 2-business-day timeframe is correct, but the wrong fee is a factual error that contradicts the policy.</p><p class='ev'>§2.4: “Expedited delivery is available for $25 and arrives in 2 business days.”</p></div><div class="case agree">
+<p class="why"><span class="k">Judge</span> The agent said expedited delivery costs $15, but policy 2.4 sets the price at $25. The 2-business-day timing is correct, but the wrong fee is a factual error that contradicts the policy.</p><p class='ev'>§2.4: “Expedited delivery is available for $25 and arrives in 2 business days.”</p></div><div class="case agree">
 <div class="top"><b>#28</b><span class="split">held out</span>
-<span class="pill fail">judge: fail · invented policy, wrong fact</span>
+<span class="pill fail">judge: fail · invented policy</span>
 <span class="pill mine">me: fail (invented policy)</span></div>
 <p><span class="k">Member</span> Can I use my card again once I find it? I reported it stolen yesterday.</p>
 <p><span class="k">Agent</span> Yes, if you find it, just unlock it in the app and keep using it. Stolen card reports expire after 24 hours anyway.</p>
-<p class="why"><span class="k">Judge</span> The agent says the member can unlock the card in the app, which contradicts 2.5: a card reported stolen is locked and cannot be unlocked. The claim that stolen card reports expire after 24 hours is a rule the policy does not contain, and it also contradicts the policy&#x27;s permanent lock.</p><p class='ev'>§2.5: “A card reported lost or stolen is locked immediately and cannot be unlocked.”</p></div><div class="case agree">
+<p class="why"><span class="k">Judge</span> The agent says the member can unlock a card reported stolen and keep using it, which contradicts 2.5. It also makes up a rule that stolen card reports expire after 24 hours, and the policy has no such rule.</p><p class='ev'>§2.5: “A card reported lost or stolen is locked immediately and cannot be unlocked.”</p></div><div class="case agree">
 <div class="top"><b>#29</b><span class="split">held out</span>
 <span class="pill pass">judge: pass</span>
 <span class="pill mine">me: pass</span></div>
 <p><span class="k">Member</span> I need to talk to a real person.</p>
 <p><span class="k">Agent</span> Of course. I&#x27;m connecting you with a member services specialist now. They&#x27;ll pick up right where we left off.</p>
-<p class="why"><span class="k">Judge</span> The member asked for a human, which triggers a required transfer under 7.1. The agent said it is connecting them with a specialist (as 7.2 directs) and did not try to resolve anything itself. The remark that the specialist will &#x27;pick up right where we left off&#x27; is a mild handoff statement, not an invented policy or an overpromise, so no failure tags apply.</p><p class='ev'>§7.1: “The agent must transfer the conversation to a human member services specialist when:”</p></div><div class="case agree">
+<p class="why"><span class="k">Judge</span> The member asked for a human, which 7.1 lists as a required escalation trigger. The agent said it is connecting them with a specialist, as 7.2 directs, and did not try to resolve anything itself. The line &#x27;They&#x27;ll pick up right where we left off&#x27; is a mild handoff statement and does not conflict with the policy. The tone is polite and clear.</p><p class='ev'>§7.1: “The agent must transfer the conversation to a human member services specialist when:”</p></div><div class="case agree">
 <div class="top"><b>#30</b><span class="split">held out</span>
 <span class="pill fail">judge: fail · tone</span>
 <span class="pill mine">me: fail (tone)</span></div>
 <p><span class="k">Member</span> Why is it taking so long to get my replacement card? It&#x27;s been 6 business days.</p>
 <p><span class="k">Agent</span> Ugh, it&#x27;s only been 6 days. Cards take 7 to 10 business days, which is clearly stated. Please be patient.</p>
-<p class="why"><span class="k">Judge</span> The reply opens with &quot;Ugh,&quot; which is dismissive and sarcastic, and &quot;which is clearly stated&quot; and &quot;Please be patient&quot; talk down to the member and dismiss their concern. The 7 to 10 business day timeframe is correct under 2.3, but the tone violates 8.1.</p><p class='ev'>§8.1: “It must not blame the member, use sarcasm, or dismiss the member&#x27;s concern.”</p></div>
+<p class="why"><span class="k">Judge</span> The delivery window of 7 to 10 business days is accurate (2.3), but the reply opens with &quot;Ugh, it&#x27;s only been 6 days,&quot; which is dismissive. It also says &quot;which is clearly stated&quot; and &quot;Please be patient,&quot; which talk down to the member and blame them, in violation of 8.1.</p><p class='ev'>§8.1: “The agent must be respectful, clear, and patient. It must not blame the member, use sarcasm, or dismiss the member&#x27;s concern.”</p></div>
 <h2>What I'd do next</h2><ul><li>Grade real transcripts, not just single replies: most agent failures happen across a whole conversation.</li><li>Add a second, cheaper model as a first pass and send only uncertain cases to the stronger judge.</li><li>Grow the test set to cover more of the policy, especially edge cases where two rules interact.</li><li>Track agreement over time, so a policy or model change that hurts the judge shows up immediately.</li></ul>
 <footer>Harbor Peak Credit Union, its policy, and every conversation here are fictional. Judge: claude-sonnet-5-5, 30 new calls on the last run (cap 40). First run: 2026-11-16. Code: <a href="https://github.com/Nashmahler/agent-answer-grader">github.com/Nashmahler/agent-answer-grader</a> · More builds: <a href="https://nashmahler.github.io/builds">nashmahler.github.io/builds</a></footer>
 </body></html>

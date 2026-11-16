@@ -1,0 +1,13 @@
+{
+ "verdict": "pass",
+ "scores": {
+  "correctness": 5,
+  "grounded_in_policy": 5,
+  "compliance": 5,
+  "tone": 4
+ },
+ "failure_tags": [],
+ "section": "5.1",
+ "quote": "Domestic wire requests received by 3:00 PM Mountain Time on a business day are sent the same day. Requests after the cutoff are sent the next business day.",
+ "explanation": "The reply correctly states that a domestic wire submitted after the 3:00 PM Mountain cutoff (such as at 4 PM) goes out the next business day, which matches section 5.1. It is a general policy question, so no verification was needed, and it contains no invented or overpromised details."
+}

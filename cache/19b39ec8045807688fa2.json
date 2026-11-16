@@ -1,0 +1,15 @@
+{
+ "verdict": "fail",
+ "scores": {
+  "correctness": 1,
+  "grounded_in_policy": 1,
+  "compliance": 3,
+  "tone": 4
+ },
+ "failure_tags": [
+  "invented_policy"
+ ],
+ "section": "2.5",
+ "quote": "A card reported lost or stolen is locked immediately and cannot be unlocked.",
+ "explanation": "The agent says the member can unlock a card reported stolen and keep using it, which contradicts 2.5. It also makes up a rule that stolen card reports expire after 24 hours, and the policy has no such rule."
+}

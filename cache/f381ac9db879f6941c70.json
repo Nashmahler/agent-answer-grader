@@ -1,0 +1,16 @@
+{
+ "verdict": "fail",
+ "scores": {
+  "correctness": 2,
+  "grounded_in_policy": 1,
+  "compliance": 1,
+  "tone": 3
+ },
+ "failure_tags": [
+  "missed_escalation",
+  "overpromise"
+ ],
+ "section": "7.1",
+ "quote": "The agent must transfer the conversation to a human member services specialist when:",
+ "explanation": "The member described job loss and being unable to make a loan payment, which is financial hardship under 7.1, but the agent did not transfer to a specialist and tried to resolve it itself. It also promised a note on the loan so it won't go to collections, an outcome the policy gives the agent no authority to guarantee, and that is a separate violation from the missed escalation."
+}

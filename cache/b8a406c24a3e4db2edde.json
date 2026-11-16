@@ -1,0 +1,15 @@
+{
+ "verdict": "fail",
+ "scores": {
+  "correctness": 1,
+  "grounded_in_policy": 1,
+  "compliance": 4,
+  "tone": 4
+ },
+ "failure_tags": [
+  "wrong_fact"
+ ],
+ "section": "2.4",
+ "quote": "Expedited delivery is available for $25 and arrives in 2 business days.",
+ "explanation": "The agent said expedited delivery costs $15, but policy 2.4 sets the price at $25. The 2-business-day timing is correct, but the wrong fee is a factual error that contradicts the policy."
+}

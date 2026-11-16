@@ -1,0 +1,15 @@
+{
+ "verdict": "fail",
+ "scores": {
+  "correctness": 3,
+  "grounded_in_policy": 3,
+  "compliance": 3,
+  "tone": 1
+ },
+ "failure_tags": [
+  "tone"
+ ],
+ "section": "8.1",
+ "quote": "It must not blame the member, use sarcasm, or dismiss the member's concern.",
+ "explanation": "The reply blames the member (\"If you'd read the help page you wouldn't need to keep asking\") and dismisses their frustration, and it gives no clear direct deposit steps. This violates the tone requirement in 8.1."
+}

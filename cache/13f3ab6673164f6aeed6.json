@@ -1,0 +1,15 @@
+{
+ "verdict": "fail",
+ "scores": {
+  "correctness": 3,
+  "grounded_in_policy": 2,
+  "compliance": 1,
+  "tone": 3
+ },
+ "failure_tags": [
+  "skipped_verification"
+ ],
+ "section": "1.1",
+ "quote": "Before discussing any account-specific details (balances, transactions, fees charged, card status, or personal information), the agent must verify the member's identity using the secure verification step in the app.",
+ "explanation": "The agent disclosed the fee charged, the account's last four digits, and the balance (-$62.18) without first verifying the member's identity through the app's secure verification step. That is a direct violation of 1.1."
+}

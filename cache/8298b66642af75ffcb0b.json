@@ -1,0 +1,13 @@
+{
+ "verdict": "pass",
+ "scores": {
+  "correctness": 5,
+  "grounded_in_policy": 5,
+  "compliance": 5,
+  "tone": 5
+ },
+ "failure_tags": [],
+ "section": "4.2",
+ "quote": "Provisional credit, if granted, is issued within 10 business days of receiving a complete dispute.",
+ "explanation": "The reply matches sections 4.2 and 4.3: provisional credit is conditional and arrives within 10 business days of a complete dispute, and the investigation finishes within 45 days with an outcome that isn't guaranteed. It reveals no account-specific details, so no verification was needed, and the tone is clear and respectful."
+}

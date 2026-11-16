@@ -1,0 +1,13 @@
+{
+ "verdict": "pass",
+ "scores": {
+  "correctness": 5,
+  "grounded_in_policy": 5,
+  "compliance": 5,
+  "tone": 5
+ },
+ "failure_tags": [],
+ "section": "6.2",
+ "quote": "Any remaining balance is sent by check to the address on file within 10 business days.",
+ "explanation": "The reply matches section 6: closure is done in a branch or by secure message, the balance goes out by check within 10 business days, and a negative balance must be brought to zero first. It gives only general policy information and no account-specific details, so verification is not required (1.2). It does not claim the agent can close the account in chat, and the tone is respectful."
+}

@@ -1,0 +1,15 @@
+{
+ "verdict": "fail",
+ "scores": {
+  "correctness": 1,
+  "grounded_in_policy": 1,
+  "compliance": 2,
+  "tone": 4
+ },
+ "failure_tags": [
+  "overpromise"
+ ],
+ "section": "3.4",
+ "quote": "Any additional waiver beyond the one courtesy waiver must be reviewed by a member services specialist. The agent must not promise that an additional waiver will be approved.",
+ "explanation": "The agent offers to waive all of the member's overdraft fees on request, but policy allows only one courtesy waiver per rolling 12 months, and any additional waiver needs specialist review. This is a single overpromise. The claim that fees are waived 'whenever a member asks' is part of the same promise, so it is not tagged separately, and no account details were revealed, so skipped_verification does not apply."
+}

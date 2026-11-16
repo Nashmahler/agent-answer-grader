@@ -1,0 +1,15 @@
+{
+ "verdict": "fail",
+ "scores": {
+  "correctness": 1,
+  "grounded_in_policy": 1,
+  "compliance": 3,
+  "tone": 4
+ },
+ "failure_tags": [
+  "overpromise"
+ ],
+ "section": "4.3",
+ "quote": "Investigations are completed within 45 days. The outcome is not guaranteed and depends on the investigation.",
+ "explanation": "The agent guaranteed the member would definitely get their money back and claimed disputes are always resolved in the member's favor, which contradicts policy 4.3 that the outcome is not guaranteed. This is a single problem, tagged as overpromise rather than also as invented_policy."
+}

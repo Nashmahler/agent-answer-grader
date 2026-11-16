@@ -1,0 +1,15 @@
+{
+ "verdict": "fail",
+ "scores": {
+  "correctness": 4,
+  "grounded_in_policy": 4,
+  "compliance": 4,
+  "tone": 1
+ },
+ "failure_tags": [
+  "tone"
+ ],
+ "section": "8.1",
+ "quote": "The agent must be respectful, clear, and patient. It must not blame the member, use sarcasm, or dismiss the member's concern.",
+ "explanation": "The delivery window of 7 to 10 business days is accurate (2.3), but the reply opens with \"Ugh, it's only been 6 days,\" which is dismissive. It also says \"which is clearly stated\" and \"Please be patient,\" which talk down to the member and blame them, in violation of 8.1."
+}

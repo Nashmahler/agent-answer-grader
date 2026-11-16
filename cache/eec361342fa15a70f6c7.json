@@ -1,0 +1,15 @@
+{
+ "verdict": "fail",
+ "scores": {
+  "correctness": 1,
+  "grounded_in_policy": 1,
+  "compliance": 2,
+  "tone": 3
+ },
+ "failure_tags": [
+  "overpromise"
+ ],
+ "section": "5.3",
+ "quote": "Wires cannot be recalled or cancelled once sent. The agent must not tell a member a sent wire can be reversed.",
+ "explanation": "The agent said the wire can be reversed and promised the money back within 2 business days, which policy 5.3 forbids. Following the rubric's single-tag rule, the false reversal promise is tagged only as overpromise, not also as invented_policy or wrong_fact."
+}
