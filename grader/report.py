@@ -6,10 +6,15 @@ import html
 from .core import TAGS, Case
 
 NEXT_STEPS = [
-    "Grade real transcripts, not just single replies: most agent failures happen across a whole conversation.",
-    "Add a second, cheaper model as a first pass and send only uncertain cases to the stronger judge.",
-    "Grow the test set to cover more of the policy, especially edge cases where two rules interact.",
-    "Track agreement over time, so a policy or model change that hurts the judge shows up immediately.",
+    "Grade whole conversations, not single replies: most agent failures happen across several turns.",
+    "Add harder, ambiguous cases where two policy rules interact, since clear-cut cases don't stress the judge.",
+    "Use a cheaper model as a first pass and send only uncertain cases to the stronger judge.",
+    "Track agreement over time, so a policy or model change that hurts the judge shows up right away.",
+]
+LEARNED = [
+    "Pass/fail was the easy part: the judge got every verdict right on the first try. My planted problems were clear-cut; real conversations won't be.",
+    "Naming the problem was the hard part. v1 piled on tags, so the one rubric change (v2) tells the judge to tag each distinct problem once. On the 10 held-out cases, exact tags went from 2 of 6 to 6 of 6.",
+    "The fail-safe caught my own bug: one cut-off reply was flagged for review instead of guessed. I fixed the parser and re-graded; the rubric didn't change.",
 ]
 
 
@@ -90,6 +95,7 @@ p{{margin:4px 0}} .k{{font-weight:600;color:#555;margin-right:4px}} .ev{{font-si
 <h2>Before and after one rubric change</h2>
 <table><tr><th>Version</th><th>Agreement</th><th>Held-out</th><th>Bad caught</th><th>False alarms</th><th>Tags exactly right</th><th>Extra tags</th><th>Needs review</th></tr>{rows_ba}</table>
 <p class="note">I changed the rubric once, using only the 20 tuning cases. The 10 held-out cases were never used for tuning, so their score is the honest one.</p>
+<h2>What I learned</h2><ul>{''.join(f'<li>{_e(s)}</li>' for s in LEARNED)}</ul>
 <h2>By failure type</h2>
 <table><tr><th>Problem planted</th><th>Caught (failed)</th><th>Named correctly</th></tr>{tag_rows}</table>
 <h2>Every case</h2>
