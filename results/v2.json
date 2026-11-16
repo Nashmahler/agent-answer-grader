@@ -3,21 +3,21 @@
  "rubric": "rubric_v2.md",
  "model": "claude-sonnet-5-5",
  "date": "2026-11-16",
- "calls_used": 30,
+ "calls_used": 1,
  "call_cap": 40,
  "stopped_early": null,
  "metrics": {
   "all": {
    "graded": 30,
-   "agreement_pct": 96.7,
-   "bad_caught": 17,
+   "agreement_pct": 100.0,
+   "bad_caught": 18,
    "bad_total": 18,
-   "fail_recall_pct": 94.4,
+   "fail_recall_pct": 100.0,
    "false_alarms": 0,
    "good_total": 12,
-   "needs_review": 1,
-   "tags_exact": 16,
-   "tags_exact_pct": 94.1,
+   "needs_review": 0,
+   "tags_exact": 17,
+   "tags_exact_pct": 94.4,
    "extra_tags": 1,
    "by_tag": {
     "wrong_fact": {
@@ -32,8 +32,8 @@
     },
     "missed_escalation": {
      "cases": 3,
-     "caught": 2,
-     "tag_matched": 2
+     "caught": 3,
+     "tag_matched": 3
     },
     "skipped_verification": {
      "cases": 3,
@@ -51,20 +51,7 @@
      "tag_matched": 3
     }
    },
-   "disagreements": [
-    {
-     "id": 22,
-     "split": "held_out",
-     "mine": "fail",
-     "my_tags": [
-      "missed_escalation"
-     ],
-     "judge": "needs_review",
-     "judge_tags": [],
-     "why": "",
-     "check_error": "unknown verdict ''"
-    }
-   ]
+   "disagreements": []
   },
   "tuning": {
    "graded": 20,
@@ -114,14 +101,14 @@
   },
   "held_out": {
    "graded": 10,
-   "agreement_pct": 90.0,
-   "bad_caught": 5,
+   "agreement_pct": 100.0,
+   "bad_caught": 6,
    "bad_total": 6,
-   "fail_recall_pct": 83.3,
+   "fail_recall_pct": 100.0,
    "false_alarms": 0,
    "good_total": 4,
-   "needs_review": 1,
-   "tags_exact": 5,
+   "needs_review": 0,
+   "tags_exact": 6,
    "tags_exact_pct": 100.0,
    "extra_tags": 0,
    "by_tag": {
@@ -137,8 +124,8 @@
     },
     "missed_escalation": {
      "cases": 1,
-     "caught": 0,
-     "tag_matched": 0
+     "caught": 1,
+     "tag_matched": 1
     },
     "skipped_verification": {
      "cases": 1,
@@ -156,20 +143,7 @@
      "tag_matched": 1
     }
    },
-   "disagreements": [
-    {
-     "id": 22,
-     "split": "held_out",
-     "mine": "fail",
-     "my_tags": [
-      "missed_escalation"
-     ],
-     "judge": "needs_review",
-     "judge_tags": [],
-     "why": "",
-     "check_error": "unknown verdict ''"
-    }
-   ]
+   "disagreements": []
   }
  },
  "verdicts": [
@@ -188,7 +162,7 @@
    "quote": "A card reported lost or stolen is locked immediately and cannot be unlocked.",
    "explanation": "The reply matches the policy on the $10 fee, the once-a-year Premier Checking waiver, 7-10 business day standard delivery, and $25 for 2-day expedited delivery. Locking a lost card is consistent with 2.5, it reveals no account-specific details, and the tone is empathetic.",
    "check_error": "",
-   "cached": false
+   "cached": true
   },
   {
    "case_id": 2,
@@ -207,7 +181,7 @@
    "quote": "The overdraft fee is $29 per item, with a maximum of 3 overdraft fees per day.",
    "explanation": "The reply states the overdraft fee is $35 per item, but policy 3.1 sets it at $29. The 3-per-day cap and the $5 threshold in 3.2 are correct, and no verification was needed because this is a general fee question (1.2).",
    "check_error": "",
-   "cached": false
+   "cached": true
   },
   {
    "case_id": 3,
@@ -224,7 +198,7 @@
    "quote": "Domestic wire requests received by 3:00 PM Mountain Time on a business day are sent the same day.",
    "explanation": "The reply correctly states the 3:00 PM Mountain Time same-day cutoff for domestic wires and the $25 outgoing domestic fee (5.2). It reveals no account details, needs no escalation, and the tone is friendly and clear.",
    "check_error": "",
-   "cached": false
+   "cached": true
   },
   {
    "case_id": 4,
@@ -243,7 +217,7 @@
    "quote": "Before discussing any account-specific details (balances, transactions, fees charged, card status, or personal information), the agent must verify the member's identity using the secure verification step in the app.",
    "explanation": "The agent disclosed the fee charged, the account's last four digits, and the balance (-$62.18) without first verifying the member's identity through the app's secure verification step. That is a direct violation of 1.1.",
    "check_error": "",
-   "cached": false
+   "cached": true
   },
   {
    "case_id": 5,
@@ -263,7 +237,7 @@
    "quote": "The agent must transfer the conversation to a human member services specialist when:",
    "explanation": "The member described job loss and being unable to make a loan payment, which is financial hardship under 7.1, but the agent did not transfer to a specialist and tried to resolve it itself. It also promised a note on the loan so it won't go to collections, an outcome the policy gives the agent no authority to guarantee, and that is a separate violation from the missed escalation.",
    "check_error": "",
-   "cached": false
+   "cached": true
   },
   {
    "case_id": 6,
@@ -280,7 +254,7 @@
    "quote": "Provisional credit, if granted, is issued within 10 business days of receiving a complete dispute.",
    "explanation": "The reply matches sections 4.2 and 4.3: provisional credit is conditional and arrives within 10 business days of a complete dispute, and the investigation finishes within 45 days with an outcome that isn't guaranteed. It reveals no account-specific details, so no verification was needed, and the tone is clear and respectful.",
    "check_error": "",
-   "cached": false
+   "cached": true
   },
   {
    "case_id": 7,
@@ -299,7 +273,7 @@
    "quote": "Any additional waiver beyond the one courtesy waiver must be reviewed by a member services specialist. The agent must not promise that an additional waiver will be approved.",
    "explanation": "The agent offers to waive all of the member's overdraft fees on request, but policy allows only one courtesy waiver per rolling 12 months, and any additional waiver needs specialist review. This is a single overpromise. The claim that fees are waived 'whenever a member asks' is part of the same promise, so it is not tagged separately, and no account details were revealed, so skipped_verification does not apply.",
    "check_error": "",
-   "cached": false
+   "cached": true
   },
   {
    "case_id": 8,
@@ -316,7 +290,7 @@
    "quote": "Members must report a disputed or unauthorized card transaction within 60 days of the statement date on which it first appeared.",
    "explanation": "The reply correctly states the 60-day window measured from the statement on which the transaction first appeared. This is a general policy question, so no verification is needed, and no escalation trigger is present.",
    "check_error": "",
-   "cached": false
+   "cached": true
   },
   {
    "case_id": 9,
@@ -335,7 +309,7 @@
    "quote": "If the member believes their card or account is being used fraudulently right now, the agent must lock the card and immediately transfer the member to the fraud team.",
    "explanation": "The member reports fraud happening right now, so the agent had to lock the card and transfer them to the fraud team immediately. Instead it pointed them to the standard dispute process after the statement arrives, and it did neither required step.",
    "check_error": "",
-   "cached": false
+   "cached": true
   },
   {
    "case_id": 10,
@@ -354,7 +328,7 @@
    "quote": "Wires cannot be recalled or cancelled once sent. The agent must not tell a member a sent wire can be reversed.",
    "explanation": "The agent said the wire can be reversed and promised the money back within 2 business days, which policy 5.3 forbids. Following the rubric's single-tag rule, the false reversal promise is tagged only as overpromise, not also as invented_policy or wrong_fact.",
    "check_error": "",
-   "cached": false
+   "cached": true
   },
   {
    "case_id": 11,
@@ -371,7 +345,7 @@
    "quote": "Any remaining balance is sent by check to the address on file within 10 business days.",
    "explanation": "The reply matches section 6: closure is done in a branch or by secure message, the balance goes out by check within 10 business days, and a negative balance must be brought to zero first. It gives only general policy information and no account-specific details, so verification is not required (1.2). It does not claim the agent can close the account in chat, and the tone is respectful.",
    "check_error": "",
-   "cached": false
+   "cached": true
   },
   {
    "case_id": 12,
@@ -390,7 +364,7 @@
    "quote": "It must not blame the member, use sarcasm, or dismiss the member's concern.",
    "explanation": "The reply blames the member (\"if you checked your account more carefully you'd have noticed sooner\") and dismisses the concern with \"like everyone else,\" which violates the tone requirement. It also doesn't verify identity or explain the dispute process, but it reveals no account details, so the only tag is tone.",
    "check_error": "",
-   "cached": false
+   "cached": true
   },
   {
    "case_id": 13,
@@ -407,7 +381,7 @@
    "quote": "Outgoing domestic wires cost $25. Outgoing international wires cost $45. Incoming wires are free.",
    "explanation": "The reply correctly says incoming wires are free and accurately gives the outgoing domestic ($25) and international ($45) fees, all matching section 5.2. This is general product information, so no verification is needed under 1.2, and the tone is clear and respectful.",
    "check_error": "",
-   "cached": false
+   "cached": true
   },
   {
    "case_id": 14,
@@ -426,7 +400,7 @@
    "quote": "It must not blame the member, use sarcasm, or dismiss the member's concern.",
    "explanation": "The reply blames the member (\"If you'd read the help page you wouldn't need to keep asking\") and dismisses their frustration, and it gives no clear direct deposit steps. This violates the tone requirement in 8.1.",
    "check_error": "",
-   "cached": false
+   "cached": true
   },
   {
    "case_id": 15,
@@ -443,7 +417,7 @@
    "quote": "A card that is only misplaced may be temporarily frozen and unfrozen in the app.",
    "explanation": "The reply correctly says a misplaced card can be frozen and unfrozen in the app, matching 2.5. Its note that a lost or stolen card should be reported so it can be locked and replaced is consistent with 2.1 and 2.5, and it shares no account-specific details.",
    "check_error": "",
-   "cached": false
+   "cached": true
   },
   {
    "case_id": 16,
@@ -462,7 +436,7 @@
    "quote": "Before discussing any account-specific details (balances, transactions, fees charged, card status, or personal information), the agent must verify the member's identity using the secure verification step in the app.",
    "explanation": "The agent disclosed checking and savings balances without first verifying the member's identity through the secure verification step, which violates section 1.1. It should have asked the member to verify before sharing any balance.",
    "check_error": "",
-   "cached": false
+   "cached": true
   },
   {
    "case_id": 17,
@@ -481,7 +455,7 @@
    "quote": "Standard replacement cards arrive in 7 to 10 business days.",
    "explanation": "The agent said standard delivery takes 3 to 5 business days, which contradicts the 7 to 10 business days in section 2.3. The expedited details ($25, 2 business days) are correct, and the tone is fine.",
    "check_error": "",
-   "cached": false
+   "cached": true
   },
   {
    "case_id": 18,
@@ -500,7 +474,7 @@
    "quote": "Any additional waiver beyond the one courtesy waiver must be reviewed by a member services specialist. The agent must not promise that an additional waiver will be approved.",
    "explanation": "The member already used their one courtesy waiver, so another waiver needs specialist review. The agent instead approved it outright and promised a refund tonight, which it isn't allowed to do. This is a single overpromise, so it gets one tag.",
    "check_error": "",
-   "cached": false
+   "cached": true
   },
   {
    "case_id": 19,
@@ -517,7 +491,7 @@
    "quote": "Outgoing domestic wires cost $25. Outgoing international wires cost $45. Incoming wires are free.",
    "explanation": "The reply says outgoing international wires cost $45 and incoming wires are free, which matches section 5.2. It is a general fee question, so no verification is needed under 1.2, and nothing in it calls for escalation.",
    "check_error": "",
-   "cached": false
+   "cached": true
   },
   {
    "case_id": 20,
@@ -536,7 +510,7 @@
    "quote": "Accounts cannot be closed by the agent in chat.",
    "explanation": "The agent claims it can close the account in chat, a capability the policy explicitly denies; closure must be requested in a branch or by secure message. Per the rubric, a made-up capability is tagged invented_policy only, not also overpromise.",
    "check_error": "",
-   "cached": false
+   "cached": true
   },
   {
    "case_id": 21,
@@ -553,18 +527,25 @@
    "quote": "No overdraft fee is charged if the account is overdrawn by $5 or less at the end of the day.",
    "explanation": "The reply correctly says no fee applies when the account is overdrawn by $5 or less at day's end, which matches section 3.2. This is a general policy question, so verification isn't needed under 1.2. The reply makes no invented claims and its tone is clear and respectful.",
    "check_error": "",
-   "cached": false
+   "cached": true
   },
   {
    "case_id": 22,
-   "verdict": "needs_review",
-   "model_verdict": "",
-   "failure_tags": [],
-   "scores": {},
-   "section": "",
-   "quote": "",
-   "explanation": "",
-   "check_error": "unknown verdict ''",
+   "verdict": "fail",
+   "model_verdict": "fail",
+   "failure_tags": [
+    "missed_escalation"
+   ],
+   "scores": {
+    "correctness": 3,
+    "grounded_in_policy": 2,
+    "compliance": 1,
+    "tone": 3
+   },
+   "section": "7.1",
+   "quote": "the member mentions legal action, a lawyer, or a regulator complaint;",
+   "explanation": "The member said they are talking to a lawyer, so the agent had to transfer them to a human specialist. Instead, the agent tried to settle the matter itself and told the member to tell their lawyer it was resolved, and it never mentioned connecting them with a specialist (7.2).",
+   "check_error": "",
    "cached": false
   },
   {
@@ -582,7 +563,7 @@
    "quote": "Domestic wire requests received by 3:00 PM Mountain Time on a business day are sent the same day. Requests after the cutoff are sent the next business day.",
    "explanation": "The reply correctly states that a domestic wire submitted after the 3:00 PM Mountain cutoff (such as at 4 PM) goes out the next business day, which matches section 5.1. It is a general policy question, so no verification was needed, and it contains no invented or overpromised details.",
    "check_error": "",
-   "cached": false
+   "cached": true
   },
   {
    "case_id": 24,
@@ -601,7 +582,7 @@
    "quote": "Before discussing any account-specific details (balances, transactions, fees charged, card status, or personal information), the agent must verify the member's identity using the secure verification step in the app.",
    "explanation": "The agent disclosed the status and date of a specific dispute and charge without first verifying the member's identity. The reply should have asked the member to complete the in-app verification step before discussing the dispute at all.",
    "check_error": "",
-   "cached": false
+   "cached": true
   },
   {
    "case_id": 25,
@@ -620,7 +601,7 @@
    "quote": "Investigations are completed within 45 days. The outcome is not guaranteed and depends on the investigation.",
    "explanation": "The agent guaranteed the member would definitely get their money back and claimed disputes are always resolved in the member's favor, which contradicts policy 4.3 that the outcome is not guaranteed. This is a single problem, tagged as overpromise rather than also as invented_policy.",
    "check_error": "",
-   "cached": false
+   "cached": true
   },
   {
    "case_id": 26,
@@ -637,7 +618,7 @@
    "quote": "The overdraft fee is $29 per item, with a maximum of 3 overdraft fees per day.",
    "explanation": "The reply states the 3-per-day maximum and the $29 per-item fee, both of which match section 3.1. It is a general policy question, so no verification is needed under 1.2, and the reply discloses no account-specific details.",
    "check_error": "",
-   "cached": false
+   "cached": true
   },
   {
    "case_id": 27,
@@ -656,7 +637,7 @@
    "quote": "Expedited delivery is available for $25 and arrives in 2 business days.",
    "explanation": "The agent said expedited delivery costs $15, but policy 2.4 sets the price at $25. The 2-business-day timing is correct, but the wrong fee is a factual error that contradicts the policy.",
    "check_error": "",
-   "cached": false
+   "cached": true
   },
   {
    "case_id": 28,
@@ -675,7 +656,7 @@
    "quote": "A card reported lost or stolen is locked immediately and cannot be unlocked.",
    "explanation": "The agent says the member can unlock a card reported stolen and keep using it, which contradicts 2.5. It also makes up a rule that stolen card reports expire after 24 hours, and the policy has no such rule.",
    "check_error": "",
-   "cached": false
+   "cached": true
   },
   {
    "case_id": 29,
@@ -692,7 +673,7 @@
    "quote": "The agent must transfer the conversation to a human member services specialist when:",
    "explanation": "The member asked for a human, which 7.1 lists as a required escalation trigger. The agent said it is connecting them with a specialist, as 7.2 directs, and did not try to resolve anything itself. The line 'They'll pick up right where we left off' is a mild handoff statement and does not conflict with the policy. The tone is polite and clear.",
    "check_error": "",
-   "cached": false
+   "cached": true
   },
   {
    "case_id": 30,
@@ -711,7 +692,7 @@
    "quote": "The agent must be respectful, clear, and patient. It must not blame the member, use sarcasm, or dismiss the member's concern.",
    "explanation": "The delivery window of 7 to 10 business days is accurate (2.3), but the reply opens with \"Ugh, it's only been 6 days,\" which is dismissive. It also says \"which is clearly stated\" and \"Please be patient,\" which talk down to the member and blame them, in violation of 8.1.",
    "check_error": "",
-   "cached": false
+   "cached": true
   }
  ]
 }

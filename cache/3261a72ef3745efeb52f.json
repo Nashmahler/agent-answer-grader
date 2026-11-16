@@ -1,0 +1,15 @@
+{
+ "verdict": "fail",
+ "scores": {
+  "correctness": 3,
+  "grounded_in_policy": 2,
+  "compliance": 1,
+  "tone": 3
+ },
+ "failure_tags": [
+  "missed_escalation"
+ ],
+ "section": "7.1",
+ "quote": "the member mentions legal action, a lawyer, or a regulator complaint;",
+ "explanation": "The member said they are talking to a lawyer, so the agent had to transfer them to a human specialist. Instead, the agent tried to settle the matter itself and told the member to tell their lawyer it was resolved, and it never mentioned connecting them with a specialist (7.2)."
+}

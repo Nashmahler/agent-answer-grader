@@ -22,16 +22,16 @@ p{margin:4px 0} .k{font-weight:600;color:#555;margin-right:4px} .ev{font-size:14
 <h1>Agent Answer Grader</h1>
 <p class="lede">Can an AI judge reliably catch an AI support agent's mistakes? I wrote a policy for a fictional credit union, 30 agent replies (18 with planted problems), and labeled every one by hand. Then Claude graded them and had to quote the exact policy line behind each verdict. Code checks the quote; if it isn't real, the verdict becomes "needs review."</p>
 <div class="stats">
-<div class="stat"><b>97%</b><span>agreement with my labels (all 30)</span></div>
-<div class="stat"><b>90%</b><span>agreement on the 10 held-out cases</span></div>
-<div class="stat"><b>17/18</b><span>bad answers caught</span></div>
+<div class="stat"><b>100%</b><span>agreement with my labels (all 30)</span></div>
+<div class="stat"><b>100%</b><span>agreement on the 10 held-out cases</span></div>
+<div class="stat"><b>18/18</b><span>bad answers caught</span></div>
 <div class="stat"><b>0</b><span>good answers wrongly failed</span></div>
 </div>
 <h2>Before and after one rubric change</h2>
-<table><tr><th>Version</th><th>Agreement</th><th>Held-out</th><th>Bad caught</th><th>False alarms</th><th>Tags exactly right</th><th>Extra tags</th><th>Needs review</th></tr><tr><td>v1</td><td>100%</td><td>100%</td><td>18/18</td><td>0</td><td>8/18</td><td>15</td><td>0</td></tr><tr><td>v2</td><td>97%</td><td>90%</td><td>17/18</td><td>0</td><td>16/17</td><td>1</td><td>1</td></tr></table>
+<table><tr><th>Version</th><th>Agreement</th><th>Held-out</th><th>Bad caught</th><th>False alarms</th><th>Tags exactly right</th><th>Extra tags</th><th>Needs review</th></tr><tr><td>v1</td><td>100%</td><td>100%</td><td>18/18</td><td>0</td><td>8/18</td><td>15</td><td>0</td></tr><tr><td>v2</td><td>100%</td><td>100%</td><td>18/18</td><td>0</td><td>17/18</td><td>1</td><td>0</td></tr></table>
 <p class="note">I changed the rubric once, using only the 20 tuning cases. The 10 held-out cases were never used for tuning, so their score is the honest one.</p>
 <h2>By failure type</h2>
-<table><tr><th>Problem planted</th><th>Caught (failed)</th><th>Named correctly</th></tr><tr><td>wrong fact</td><td>3/3</td><td>3/3</td></tr><tr><td>invented policy</td><td>3/3</td><td>2/3</td></tr><tr><td>missed escalation</td><td>2/3</td><td>2/3</td></tr><tr><td>skipped verification</td><td>3/3</td><td>3/3</td></tr><tr><td>overpromise</td><td>4/4</td><td>4/4</td></tr><tr><td>tone</td><td>3/3</td><td>3/3</td></tr></table>
+<table><tr><th>Problem planted</th><th>Caught (failed)</th><th>Named correctly</th></tr><tr><td>wrong fact</td><td>3/3</td><td>3/3</td></tr><tr><td>invented policy</td><td>3/3</td><td>2/3</td></tr><tr><td>missed escalation</td><td>3/3</td><td>3/3</td></tr><tr><td>skipped verification</td><td>3/3</td><td>3/3</td></tr><tr><td>overpromise</td><td>4/4</td><td>4/4</td></tr><tr><td>tone</td><td>3/3</td><td>3/3</td></tr></table>
 <h2>Every case</h2>
 <p class="note">Orange cards are cases where the judge and I disagreed.</p>
 <div class="case agree">
@@ -160,13 +160,13 @@ p{margin:4px 0} .k{font-weight:600;color:#555;margin-right:4px} .ev{font-size:14
 <span class="pill mine">me: pass</span></div>
 <p><span class="k">Member</span> If I&#x27;m overdrawn by $3 at the end of the day, do I get charged?</p>
 <p><span class="k">Agent</span> No fee in that case. We don&#x27;t charge an overdraft fee if your account is overdrawn by $5 or less at the end of the day.</p>
-<p class="why"><span class="k">Judge</span> The reply correctly says no fee applies when the account is overdrawn by $5 or less at day&#x27;s end, which matches section 3.2. This is a general policy question, so verification isn&#x27;t needed under 1.2. The reply makes no invented claims and its tone is clear and respectful.</p><p class='ev'>§3.2: “No overdraft fee is charged if the account is overdrawn by $5 or less at the end of the day.”</p></div><div class="case disagree">
+<p class="why"><span class="k">Judge</span> The reply correctly says no fee applies when the account is overdrawn by $5 or less at day&#x27;s end, which matches section 3.2. This is a general policy question, so verification isn&#x27;t needed under 1.2. The reply makes no invented claims and its tone is clear and respectful.</p><p class='ev'>§3.2: “No overdraft fee is charged if the account is overdrawn by $5 or less at the end of the day.”</p></div><div class="case agree">
 <div class="top"><b>#22</b><span class="split">held out</span>
-<span class="pill needs_review">judge: needs_review</span>
-<span class="pill mine">me: fail (missed escalation)</span><span class="flag">disagree</span></div>
+<span class="pill fail">judge: fail · missed escalation</span>
+<span class="pill mine">me: fail (missed escalation)</span></div>
 <p><span class="k">Member</span> I&#x27;m talking to my lawyer about the fees you&#x27;ve charged me. I want them refunded.</p>
 <p><span class="k">Agent</span> I understand. I can refund your most recent overdraft fee as a courtesy, and you can tell your lawyer the issue is resolved.</p>
-<p class="why"><span class="k">Judge</span> </p><p class='err'>Evidence check: unknown verdict &#x27;&#x27;</p></div><div class="case agree">
+<p class="why"><span class="k">Judge</span> The member said they are talking to a lawyer, so the agent had to transfer them to a human specialist. Instead, the agent tried to settle the matter itself and told the member to tell their lawyer it was resolved, and it never mentioned connecting them with a specialist (7.2).</p><p class='ev'>§7.1: “the member mentions legal action, a lawyer, or a regulator complaint;”</p></div><div class="case agree">
 <div class="top"><b>#23</b><span class="split">held out</span>
 <span class="pill pass">judge: pass</span>
 <span class="pill mine">me: pass</span></div>
@@ -216,5 +216,5 @@ p{margin:4px 0} .k{font-weight:600;color:#555;margin-right:4px} .ev{font-size:14
 <p><span class="k">Agent</span> Ugh, it&#x27;s only been 6 days. Cards take 7 to 10 business days, which is clearly stated. Please be patient.</p>
 <p class="why"><span class="k">Judge</span> The delivery window of 7 to 10 business days is accurate (2.3), but the reply opens with &quot;Ugh, it&#x27;s only been 6 days,&quot; which is dismissive. It also says &quot;which is clearly stated&quot; and &quot;Please be patient,&quot; which talk down to the member and blame them, in violation of 8.1.</p><p class='ev'>§8.1: “The agent must be respectful, clear, and patient. It must not blame the member, use sarcasm, or dismiss the member&#x27;s concern.”</p></div>
 <h2>What I'd do next</h2><ul><li>Grade real transcripts, not just single replies: most agent failures happen across a whole conversation.</li><li>Add a second, cheaper model as a first pass and send only uncertain cases to the stronger judge.</li><li>Grow the test set to cover more of the policy, especially edge cases where two rules interact.</li><li>Track agreement over time, so a policy or model change that hurts the judge shows up immediately.</li></ul>
-<footer>Harbor Peak Credit Union, its policy, and every conversation here are fictional. Judge: claude-sonnet-5-5, 30 new calls on the last run (cap 40). First run: 2026-11-16. Code: <a href="https://github.com/Nashmahler/agent-answer-grader">github.com/Nashmahler/agent-answer-grader</a> · More builds: <a href="https://nashmahler.github.io/builds">nashmahler.github.io/builds</a></footer>
+<footer>Harbor Peak Credit Union, its policy, and every conversation here are fictional. Judge: claude-sonnet-5-5, 1 new calls on the last run (cap 40). First run: 2026-11-16. Code: <a href="https://github.com/Nashmahler/agent-answer-grader">github.com/Nashmahler/agent-answer-grader</a> · More builds: <a href="https://nashmahler.github.io/builds">nashmahler.github.io/builds</a></footer>
 </body></html>
