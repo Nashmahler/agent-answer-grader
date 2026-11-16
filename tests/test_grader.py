@@ -159,3 +159,11 @@ def test_tag_precision_counts_exact_matches_and_extras():
     verdicts = [_v(1, "fail", ["overpromise", "invented_policy", "wrong_fact"]), _v(2, "fail", ["tone"])]
     m = metrics.score(cases, verdicts)
     assert (m["tags_exact"], m["tags_exact_pct"], m["extra_tags"]) == (1, 50.0, 2)
+
+
+def test_cut_off_reply_is_not_mistaken_for_a_verdict(tmp_path):
+    truncated = '{"verdict": "fail", "scores": {"correctness": 3, "compliance": 1}, "failure_tags": ["missed_esc'
+    llm = FakeLLM(lambda u: truncated)
+    v = core.judge(CASES[21], POLICY, SECTIONS, "r", llm, Budget(), tmp_path)
+    assert v.verdict == "needs_review" and "judge error" in v.check_error
+    assert list(tmp_path.glob("*.json")) == []  # a broken reply is never cached

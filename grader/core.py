@@ -125,7 +125,7 @@ class Claude:
     def __init__(self, model: str = MODEL):
         self.model, self._client = model, None
 
-    def complete(self, system: str, user: str, max_tokens: int = 800) -> str:
+    def complete(self, system: str, user: str, max_tokens: int = 1500) -> str:
         if self._client is None:
             if not os.environ.get("ANTHROPIC_API_KEY"):
                 raise RuntimeError("ANTHROPIC_API_KEY is not set")
@@ -159,15 +159,19 @@ Grade the agent's reply. Return JSON:
 
 
 def extract_json(text: str) -> dict:
+    """The first JSON object in the reply that has a verdict. A cut-off reply can still contain a
+    complete inner object (like the scores), which must not be mistaken for the answer."""
     text = re.sub(r"```(?:json)?", "", text)
     dec = json.JSONDecoder()
     for i, ch in enumerate(text):
         if ch == "{":
             try:
-                return dec.raw_decode(text[i:])[0]
+                obj = dec.raw_decode(text[i:])[0]
             except json.JSONDecodeError:
                 continue
-    raise ValueError("no JSON object in reply")
+            if isinstance(obj, dict) and "verdict" in obj:
+                return obj
+    raise ValueError("no complete JSON verdict in reply")
 
 
 def cache_key(case: Case, policy: str, rubric: str, model: str) -> str:
