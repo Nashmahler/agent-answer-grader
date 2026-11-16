@@ -7,6 +7,7 @@ body{font:16px/1.5 -apple-system,Segoe UI,Arial,sans-serif;max-width:860px;margi
 h1{font-size:26px;margin:6px 0 4px} h2{font-size:19px;margin:28px 0 8px} .lede{color:#444}
 .stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px;margin:16px 0}
 .stat{background:#fff;border-radius:12px;padding:12px} .stat b{display:block;font-size:26px} .stat span{color:#555;font-size:13px}
+  .scroll{overflow-x:auto;border-radius:12px}
 table{border-collapse:collapse;width:100%;background:#fff;border-radius:12px;overflow:hidden;font-size:14px}
 th,td{text-align:left;padding:8px 10px;border-bottom:1px solid #eee} th{background:#efede8}
 .case{background:#fff;border-radius:12px;padding:12px 14px;margin:10px 0;border-left:5px solid #2e7d4f}
@@ -15,7 +16,7 @@ th,td{text-align:left;padding:8px 10px;border-bottom:1px solid #eee} th{backgrou
 .pill,.split,.flag{font-size:12px;border-radius:99px;padding:2px 9px} .split{background:#eee;color:#555}
 .pill.pass{background:#e3f3e8;color:#1e6b3f} .pill.fail{background:#fbe5e2;color:#9d2a1d}
 .pill.needs_review{background:#fff1cc;color:#7a5a00} .pill.mine{background:#eef1f7;color:#334}
-.flag{background:#d08a00;color:#fff;font-weight:700}
+.flag{background:#d08a00;color:#fff;font-weight:700} .flag.tag{background:#6b7fa8}
 p{margin:4px 0} .k{font-weight:600;color:#555;margin-right:4px} .ev{font-size:14px;color:#3a5a40} .err{font-size:14px;color:#9d2a1d}
 .why{font-size:14px;color:#333} .note{font-size:14px;color:#555} footer{margin:30px 0 10px;color:#666;font-size:14px}
 </style></head><body>
@@ -25,16 +26,16 @@ p{margin:4px 0} .k{font-weight:600;color:#555;margin-right:4px} .ev{font-size:14
 <div class="stat"><b>100%</b><span>agreement with my labels (all 30)</span></div>
 <div class="stat"><b>100%</b><span>agreement on the 10 held-out cases</span></div>
 <div class="stat"><b>18/18</b><span>bad answers caught</span></div>
-<div class="stat"><b>0</b><span>good answers wrongly failed</span></div>
+<div class="stat"><b>17/18</b><span>problems named exactly right (v1: 8/18)</span></div>
 </div>
 <h2>Before and after one rubric change</h2>
-<table><tr><th>Version</th><th>Agreement</th><th>Held-out</th><th>Bad caught</th><th>False alarms</th><th>Tags exactly right</th><th>Extra tags</th><th>Needs review</th></tr><tr><td>v1</td><td>100%</td><td>100%</td><td>18/18</td><td>0</td><td>8/18</td><td>15</td><td>0</td></tr><tr><td>v2</td><td>100%</td><td>100%</td><td>18/18</td><td>0</td><td>17/18</td><td>1</td><td>0</td></tr></table>
+<div class="scroll"><table><tr><th>Rubric</th><th>Problem named right</th><th>Extra tags</th><th>Pass/fail agreement</th><th>Bad caught</th><th>False alarms</th></tr><tr><td>v1</td><td>8/18</td><td>15</td><td>100%</td><td>18/18</td><td>0</td></tr><tr><td>v2</td><td>17/18</td><td>1</td><td>100%</td><td>18/18</td><td>0</td></tr></table></div>
 <p class="note">I changed the rubric once, using only the 20 tuning cases. The 10 held-out cases were never used for tuning, so their score is the honest one.</p>
 <h2>What I learned</h2><ul><li>Pass/fail was the easy part: the judge got every verdict right on the first try. My planted problems were clear-cut; real conversations won&#x27;t be.</li><li>Naming the problem was the hard part. v1 piled on tags, so the one rubric change (v2) tells the judge to tag each distinct problem once. On the 10 held-out cases, exact tags went from 2 of 6 to 6 of 6.</li><li>The fail-safe caught my own bug: one cut-off reply was flagged for review instead of guessed. I fixed the parser and re-graded; the rubric didn&#x27;t change.</li></ul>
 <h2>By failure type</h2>
 <table><tr><th>Problem planted</th><th>Caught (failed)</th><th>Named correctly</th></tr><tr><td>wrong fact</td><td>3/3</td><td>3/3</td></tr><tr><td>invented policy</td><td>3/3</td><td>2/3</td></tr><tr><td>missed escalation</td><td>3/3</td><td>3/3</td></tr><tr><td>skipped verification</td><td>3/3</td><td>3/3</td></tr><tr><td>overpromise</td><td>4/4</td><td>4/4</td></tr><tr><td>tone</td><td>3/3</td><td>3/3</td></tr></table>
 <h2>Every case</h2>
-<p class="note">Orange cards are cases where the judge and I disagreed.</p>
+<p class="note">Orange cards are cases where the judge and I disagreed on pass/fail. "Tags differ" means we agreed it failed but named the problem differently.</p>
 <div class="case agree">
 <div class="top"><b>#1</b><span class="split">tuning</span>
 <span class="pill pass">judge: pass</span>
@@ -74,7 +75,7 @@ p{margin:4px 0} .k{font-weight:600;color:#555;margin-right:4px} .ev{font-size:14
 <p class="why"><span class="k">Judge</span> The reply matches sections 4.2 and 4.3: provisional credit is conditional and arrives within 10 business days of a complete dispute, and the investigation finishes within 45 days with an outcome that isn&#x27;t guaranteed. It reveals no account-specific details, so no verification was needed, and the tone is clear and respectful.</p><p class='ev'>§4.2: “Provisional credit, if granted, is issued within 10 business days of receiving a complete dispute.”</p></div><div class="case agree">
 <div class="top"><b>#7</b><span class="split">tuning</span>
 <span class="pill fail">judge: fail · overpromise</span>
-<span class="pill mine">me: fail (invented policy)</span></div>
+<span class="pill mine">me: fail (invented policy)</span><span class="flag tag">tags differ</span></div>
 <p><span class="k">Member</span> Can I get my overdraft fee waived? It&#x27;s the first time this year.</p>
 <p><span class="k">Agent</span> Absolutely. Since we can waive overdraft fees whenever a member asks, I&#x27;ll take care of it. Just let me know which fees you want removed and I&#x27;ll waive all of them.</p>
 <p class="why"><span class="k">Judge</span> The agent offers to waive all of the member&#x27;s overdraft fees on request, but policy allows only one courtesy waiver per rolling 12 months, and any additional waiver needs specialist review. This is a single overpromise. The claim that fees are waived &#x27;whenever a member asks&#x27; is part of the same promise, so it is not tagged separately, and no account details were revealed, so skipped_verification does not apply.</p><p class='ev'>§3.4: “Any additional waiver beyond the one courtesy waiver must be reviewed by a member services specialist. The agent must not promise that an additional waiver will be approved.”</p></div><div class="case agree">
