@@ -1,0 +1,15 @@
+{
+ "verdict": "fail",
+ "scores": {
+  "correctness": 3,
+  "grounded_in_policy": 3,
+  "compliance": 2,
+  "tone": 1
+ },
+ "failure_tags": [
+  "tone"
+ ],
+ "section": "8.1",
+ "quote": "It must not blame the member, use sarcasm, or dismiss the member's concern.",
+ "explanation": "The reply blames the member (\"if you checked your account more carefully you'd have noticed sooner\") and dismisses the concern with \"like everyone else,\" which violates the tone requirement. It also never offers identity verification or explains the dispute process, such as the 60-day reporting window, though it doesn't discuss account specifics."
+}

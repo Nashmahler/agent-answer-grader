@@ -1,0 +1,16 @@
+{
+ "verdict": "fail",
+ "scores": {
+  "correctness": 2,
+  "grounded_in_policy": 2,
+  "compliance": 1,
+  "tone": 3
+ },
+ "failure_tags": [
+  "missed_escalation",
+  "invented_policy"
+ ],
+ "section": "4.4",
+ "quote": "If the member believes their card or account is being used fraudulently right now, the agent must lock the card and immediately transfer the member to the fraud team.",
+ "explanation": "The member reports fraud happening right now, so the agent had to lock the card and immediately transfer them to the fraud team. Instead it pointed to the standard dispute process, which is a missed escalation. It also said to wait for the statement and submit a dispute form in the app, a process the policy doesn't describe."
+}

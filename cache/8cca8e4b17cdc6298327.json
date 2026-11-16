@@ -1,0 +1,16 @@
+{
+ "verdict": "fail",
+ "scores": {
+  "correctness": 1,
+  "grounded_in_policy": 1,
+  "compliance": 2,
+  "tone": 3
+ },
+ "failure_tags": [
+  "invented_policy",
+  "wrong_fact"
+ ],
+ "section": "2.5",
+ "quote": "A card reported lost or stolen is locked immediately and cannot be unlocked.",
+ "explanation": "The agent says the member can unlock the card in the app, which contradicts 2.5: a card reported stolen is locked and cannot be unlocked. The claim that stolen card reports expire after 24 hours is a rule the policy does not contain, and it also contradicts the policy's permanent lock."
+}

@@ -1,0 +1,15 @@
+{
+ "verdict": "fail",
+ "scores": {
+  "correctness": 4,
+  "grounded_in_policy": 4,
+  "compliance": 4,
+  "tone": 1
+ },
+ "failure_tags": [
+  "tone"
+ ],
+ "section": "8.1",
+ "quote": "It must not blame the member, use sarcasm, or dismiss the member's concern.",
+ "explanation": "The reply opens with \"Ugh,\" which is dismissive and sarcastic, and \"which is clearly stated\" and \"Please be patient\" talk down to the member and dismiss their concern. The 7 to 10 business day timeframe is correct under 2.3, but the tone violates 8.1."
+}

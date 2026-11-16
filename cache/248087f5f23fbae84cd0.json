@@ -1,0 +1,13 @@
+{
+ "verdict": "pass",
+ "scores": {
+  "correctness": 5,
+  "grounded_in_policy": 5,
+  "compliance": 5,
+  "tone": 4
+ },
+ "failure_tags": [],
+ "section": "4.1",
+ "quote": "Members must report a disputed or unauthorized card transaction within 60 days of the statement date on which it first appeared.",
+ "explanation": "The reply gives the 60-day window measured from the statement date on which the transaction first appeared, matching section 4.1. This is a general policy question, so verification (1.2) is not needed, and no escalation trigger is present."
+}

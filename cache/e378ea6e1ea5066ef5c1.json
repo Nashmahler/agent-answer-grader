@@ -1,0 +1,13 @@
+{
+ "verdict": "pass",
+ "scores": {
+  "correctness": 5,
+  "grounded_in_policy": 5,
+  "compliance": 5,
+  "tone": 5
+ },
+ "failure_tags": [],
+ "section": "7.1",
+ "quote": "The agent must transfer the conversation to a human member services specialist when:",
+ "explanation": "The member asked for a human, which triggers a required transfer under 7.1. The agent said it is connecting them with a specialist (as 7.2 directs) and did not try to resolve anything itself. The remark that the specialist will 'pick up right where we left off' is a mild handoff statement, not an invented policy or an overpromise, so no failure tags apply."
+}

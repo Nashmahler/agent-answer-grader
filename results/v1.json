@@ -1,0 +1,704 @@
+{
+ "label": "v1",
+ "rubric": "rubric.md",
+ "model": "claude-sonnet-5-5",
+ "date": "2026-11-16",
+ "calls_used": 30,
+ "call_cap": 40,
+ "stopped_early": null,
+ "metrics": {
+  "all": {
+   "graded": 30,
+   "agreement_pct": 100.0,
+   "bad_caught": 18,
+   "bad_total": 18,
+   "fail_recall_pct": 100.0,
+   "false_alarms": 0,
+   "good_total": 12,
+   "needs_review": 0,
+   "by_tag": {
+    "wrong_fact": {
+     "cases": 3,
+     "caught": 3,
+     "tag_matched": 3
+    },
+    "invented_policy": {
+     "cases": 3,
+     "caught": 3,
+     "tag_matched": 3
+    },
+    "missed_escalation": {
+     "cases": 3,
+     "caught": 3,
+     "tag_matched": 3
+    },
+    "skipped_verification": {
+     "cases": 3,
+     "caught": 3,
+     "tag_matched": 3
+    },
+    "overpromise": {
+     "cases": 4,
+     "caught": 4,
+     "tag_matched": 4
+    },
+    "tone": {
+     "cases": 3,
+     "caught": 3,
+     "tag_matched": 3
+    }
+   },
+   "disagreements": []
+  },
+  "tuning": {
+   "graded": 20,
+   "agreement_pct": 100.0,
+   "bad_caught": 12,
+   "bad_total": 12,
+   "fail_recall_pct": 100.0,
+   "false_alarms": 0,
+   "good_total": 8,
+   "needs_review": 0,
+   "by_tag": {
+    "wrong_fact": {
+     "cases": 2,
+     "caught": 2,
+     "tag_matched": 2
+    },
+    "invented_policy": {
+     "cases": 2,
+     "caught": 2,
+     "tag_matched": 2
+    },
+    "missed_escalation": {
+     "cases": 2,
+     "caught": 2,
+     "tag_matched": 2
+    },
+    "skipped_verification": {
+     "cases": 2,
+     "caught": 2,
+     "tag_matched": 2
+    },
+    "overpromise": {
+     "cases": 3,
+     "caught": 3,
+     "tag_matched": 3
+    },
+    "tone": {
+     "cases": 2,
+     "caught": 2,
+     "tag_matched": 2
+    }
+   },
+   "disagreements": []
+  },
+  "held_out": {
+   "graded": 10,
+   "agreement_pct": 100.0,
+   "bad_caught": 6,
+   "bad_total": 6,
+   "fail_recall_pct": 100.0,
+   "false_alarms": 0,
+   "good_total": 4,
+   "needs_review": 0,
+   "by_tag": {
+    "wrong_fact": {
+     "cases": 1,
+     "caught": 1,
+     "tag_matched": 1
+    },
+    "invented_policy": {
+     "cases": 1,
+     "caught": 1,
+     "tag_matched": 1
+    },
+    "missed_escalation": {
+     "cases": 1,
+     "caught": 1,
+     "tag_matched": 1
+    },
+    "skipped_verification": {
+     "cases": 1,
+     "caught": 1,
+     "tag_matched": 1
+    },
+    "overpromise": {
+     "cases": 1,
+     "caught": 1,
+     "tag_matched": 1
+    },
+    "tone": {
+     "cases": 1,
+     "caught": 1,
+     "tag_matched": 1
+    }
+   },
+   "disagreements": []
+  }
+ },
+ "verdicts": [
+  {
+   "case_id": 1,
+   "verdict": "pass",
+   "model_verdict": "pass",
+   "failure_tags": [],
+   "scores": {
+    "correctness": 5,
+    "grounded_in_policy": 5,
+    "compliance": 5,
+    "tone": 5
+   },
+   "section": "2.5",
+   "quote": "A card reported lost or stolen is locked immediately and cannot be unlocked.",
+   "explanation": "The reply's facts match the policy: $10 fee, waived once per calendar year with Premier Checking, 7 to 10 business days standard, $25 for 2-day expedited, and the lost card is locked. It shares no account-specific details, needs no escalation, and the tone is courteous.",
+   "check_error": "",
+   "cached": false
+  },
+  {
+   "case_id": 2,
+   "verdict": "fail",
+   "model_verdict": "fail",
+   "failure_tags": [
+    "wrong_fact"
+   ],
+   "scores": {
+    "correctness": 2,
+    "grounded_in_policy": 2,
+    "compliance": 5,
+    "tone": 5
+   },
+   "section": "3.1",
+   "quote": "The overdraft fee is $29 per item, with a maximum of 3 overdraft fees per day.",
+   "explanation": "The reply states the overdraft fee is $35 per item, but policy 3.1 sets it at $29. The 3-per-day cap and the $5-or-less no-fee rule (3.2) are correct, and the question was general so no verification was needed.",
+   "check_error": "",
+   "cached": false
+  },
+  {
+   "case_id": 3,
+   "verdict": "pass",
+   "model_verdict": "pass",
+   "failure_tags": [],
+   "scores": {
+    "correctness": 5,
+    "grounded_in_policy": 5,
+    "compliance": 5,
+    "tone": 5
+   },
+   "section": "5.1",
+   "quote": "Domestic wire requests received by 3:00 PM Mountain Time on a business day are sent the same day.",
+   "explanation": "The reply correctly states the 3:00 PM Mountain Time same-day cutoff and the $25 outgoing domestic wire fee (5.2). It makes no account-specific disclosures, so verification isn't needed, and no escalation trigger is present. The tone is friendly and clear.",
+   "check_error": "",
+   "cached": false
+  },
+  {
+   "case_id": 4,
+   "verdict": "fail",
+   "model_verdict": "fail",
+   "failure_tags": [
+    "skipped_verification"
+   ],
+   "scores": {
+    "correctness": 3,
+    "grounded_in_policy": 3,
+    "compliance": 1,
+    "tone": 3
+   },
+   "section": "1.1",
+   "quote": "Before discussing any account-specific details (balances, transactions, fees charged, card status, or personal information), the agent must verify the member's identity using the secure verification step in the app.",
+   "explanation": "The agent disclosed account-specific details (the $29 fee, account ending in 4471, and a balance of -$62.18) without first verifying the member's identity through the app's secure verification step, which violates section 1.1.",
+   "check_error": "",
+   "cached": false
+  },
+  {
+   "case_id": 5,
+   "verdict": "fail",
+   "model_verdict": "fail",
+   "failure_tags": [
+    "missed_escalation",
+    "invented_policy",
+    "overpromise"
+   ],
+   "scores": {
+    "correctness": 2,
+    "grounded_in_policy": 1,
+    "compliance": 1,
+    "tone": 3
+   },
+   "section": "7.1",
+   "quote": "the member describes financial hardship, such as job loss, medical emergency, or inability to make loan payments;",
+   "explanation": "The member described job loss and inability to make a loan payment, which requires transfer to a human specialist under 7.1, but the agent tried to resolve it itself and did not transfer. It also invented a capability (noting the loan to avoid collections, suggesting a smaller payment) and promised an outcome the policy does not support.",
+   "check_error": "",
+   "cached": false
+  },
+  {
+   "case_id": 6,
+   "verdict": "pass",
+   "model_verdict": "pass",
+   "failure_tags": [],
+   "scores": {
+    "correctness": 5,
+    "grounded_in_policy": 5,
+    "compliance": 5,
+    "tone": 5
+   },
+   "section": "4.2",
+   "quote": "Provisional credit, if granted, is issued within 10 business days of receiving a complete dispute.",
+   "explanation": "The reply gives the 10-business-day provisional credit window and the 45-day investigation timeline, and says the outcome depends on the investigation (4.2, 4.3). It discusses no account-specific details, so verification isn't needed. It promises nothing the policy doesn't allow, and the tone is respectful.",
+   "check_error": "",
+   "cached": false
+  },
+  {
+   "case_id": 7,
+   "verdict": "fail",
+   "model_verdict": "fail",
+   "failure_tags": [
+    "invented_policy",
+    "overpromise",
+    "skipped_verification"
+   ],
+   "scores": {
+    "correctness": 1,
+    "grounded_in_policy": 1,
+    "compliance": 2,
+    "tone": 4
+   },
+   "section": "3.4",
+   "quote": "Any additional waiver beyond the one courtesy waiver must be reviewed by a member services specialist. The agent must not promise that an additional waiver will be approved.",
+   "explanation": "The agent claims fees can be waived whenever a member asks and offers to waive all of them, but policy allows only one courtesy waiver per rolling 12 months and further waivers need specialist review. It also begins acting on the fee waiver without first verifying identity (1.1), which is required before discussing account-specific fees.",
+   "check_error": "",
+   "cached": false
+  },
+  {
+   "case_id": 8,
+   "verdict": "pass",
+   "model_verdict": "pass",
+   "failure_tags": [],
+   "scores": {
+    "correctness": 5,
+    "grounded_in_policy": 5,
+    "compliance": 5,
+    "tone": 4
+   },
+   "section": "4.1",
+   "quote": "Members must report a disputed or unauthorized card transaction within 60 days of the statement date on which it first appeared.",
+   "explanation": "The reply gives the 60-day window measured from the statement date on which the transaction first appeared, matching section 4.1. This is a general policy question, so verification (1.2) is not needed, and no escalation trigger is present.",
+   "check_error": "",
+   "cached": false
+  },
+  {
+   "case_id": 9,
+   "verdict": "fail",
+   "model_verdict": "fail",
+   "failure_tags": [
+    "missed_escalation",
+    "invented_policy"
+   ],
+   "scores": {
+    "correctness": 2,
+    "grounded_in_policy": 2,
+    "compliance": 1,
+    "tone": 3
+   },
+   "section": "4.4",
+   "quote": "If the member believes their card or account is being used fraudulently right now, the agent must lock the card and immediately transfer the member to the fraud team.",
+   "explanation": "The member reports fraud happening right now, so the agent had to lock the card and immediately transfer them to the fraud team. Instead it pointed to the standard dispute process, which is a missed escalation. It also said to wait for the statement and submit a dispute form in the app, a process the policy doesn't describe.",
+   "check_error": "",
+   "cached": false
+  },
+  {
+   "case_id": 10,
+   "verdict": "fail",
+   "model_verdict": "fail",
+   "failure_tags": [
+    "invented_policy",
+    "overpromise",
+    "wrong_fact"
+   ],
+   "scores": {
+    "correctness": 1,
+    "grounded_in_policy": 1,
+    "compliance": 2,
+    "tone": 3
+   },
+   "section": "5.3",
+   "quote": "Wires cannot be recalled or cancelled once sent. The agent must not tell a member a sent wire can be reversed.",
+   "explanation": "The agent told the member the wire can be reversed through a recall request and that the money would return within 2 business days. This contradicts 5.3, invents a recall capability and timeline, and promises an outcome the agent cannot deliver.",
+   "check_error": "",
+   "cached": false
+  },
+  {
+   "case_id": 11,
+   "verdict": "pass",
+   "model_verdict": "pass",
+   "failure_tags": [],
+   "scores": {
+    "correctness": 5,
+    "grounded_in_policy": 5,
+    "compliance": 5,
+    "tone": 5
+   },
+   "section": "6.1",
+   "quote": "Members can request to close an account in a branch or by secure message.",
+   "explanation": "The reply matches sections 6.1-6.3: closing via branch or secure message, remaining balance sent by check to the address on file within 10 business days, and a negative balance must be brought to zero first. It asks for no account-specific details, so verification isn't triggered, and its tone is clear and respectful.",
+   "check_error": "",
+   "cached": false
+  },
+  {
+   "case_id": 12,
+   "verdict": "fail",
+   "model_verdict": "fail",
+   "failure_tags": [
+    "tone"
+   ],
+   "scores": {
+    "correctness": 3,
+    "grounded_in_policy": 3,
+    "compliance": 2,
+    "tone": 1
+   },
+   "section": "8.1",
+   "quote": "It must not blame the member, use sarcasm, or dismiss the member's concern.",
+   "explanation": "The reply blames the member (\"if you checked your account more carefully you'd have noticed sooner\") and dismisses the concern with \"like everyone else,\" which violates the tone requirement. It also never offers identity verification or explains the dispute process, such as the 60-day reporting window, though it doesn't discuss account specifics.",
+   "check_error": "",
+   "cached": false
+  },
+  {
+   "case_id": 13,
+   "verdict": "pass",
+   "model_verdict": "pass",
+   "failure_tags": [],
+   "scores": {
+    "correctness": 5,
+    "grounded_in_policy": 5,
+    "compliance": 5,
+    "tone": 5
+   },
+   "section": "5.2",
+   "quote": "Outgoing domestic wires cost $25. Outgoing international wires cost $45. Incoming wires are free.",
+   "explanation": "The reply correctly says incoming wires are free and accurately adds the outgoing fees ($25 domestic, $45 international), both matching section 5.2. This is general product information, so no verification is needed, and no escalation or tone issue applies.",
+   "check_error": "",
+   "cached": false
+  },
+  {
+   "case_id": 14,
+   "verdict": "fail",
+   "model_verdict": "fail",
+   "failure_tags": [
+    "tone"
+   ],
+   "scores": {
+    "correctness": 2,
+    "grounded_in_policy": 2,
+    "compliance": 3,
+    "tone": 1
+   },
+   "section": "8.1",
+   "quote": "It must not blame the member, use sarcasm, or dismiss the member's concern.",
+   "explanation": "The reply blames the member (\"If you'd read the help page you wouldn't need to keep asking\") and dismisses their frustration. It also gives no actual steps for setting up direct deposit, which violates the respectful, clear, and patient tone required by 8.1.",
+   "check_error": "",
+   "cached": false
+  },
+  {
+   "case_id": 15,
+   "verdict": "pass",
+   "model_verdict": "pass",
+   "failure_tags": [],
+   "scores": {
+    "correctness": 5,
+    "grounded_in_policy": 5,
+    "compliance": 5,
+    "tone": 5
+   },
+   "section": "2.5",
+   "quote": "A card that is only misplaced may be temporarily frozen and unfrozen in the app.",
+   "explanation": "The reply correctly says a misplaced card can be frozen and unfrozen in the app, matching 2.5. Its note that a lost or stolen card should be reported so it can be locked and replaced is consistent with 2.1 and 2.5. It states no incorrect numbers, makes no account-specific disclosures, and needs no escalation.",
+   "check_error": "",
+   "cached": false
+  },
+  {
+   "case_id": 16,
+   "verdict": "fail",
+   "model_verdict": "fail",
+   "failure_tags": [
+    "skipped_verification"
+   ],
+   "scores": {
+    "correctness": 2,
+    "grounded_in_policy": 1,
+    "compliance": 1,
+    "tone": 3
+   },
+   "section": "1.1",
+   "quote": "Before discussing any account-specific details (balances, transactions, fees charged, card status, or personal information), the agent must verify the member's identity using the secure verification step in the app.",
+   "explanation": "The agent disclosed checking and savings balances without first verifying the member's identity through the app's secure verification step, which section 1.1 requires before sharing any balance. It should have asked the member to verify first.",
+   "check_error": "",
+   "cached": false
+  },
+  {
+   "case_id": 17,
+   "verdict": "fail",
+   "model_verdict": "fail",
+   "failure_tags": [
+    "wrong_fact"
+   ],
+   "scores": {
+    "correctness": 2,
+    "grounded_in_policy": 2,
+    "compliance": 5,
+    "tone": 5
+   },
+   "section": "2.3",
+   "quote": "Standard replacement cards arrive in 7 to 10 business days.",
+   "explanation": "The reply says standard delivery takes 3 to 5 business days, which contradicts the policy's 7 to 10 business days. The expedited option ($25, 2 business days) is correct, but the wrong standard timeframe is a factual error that could mislead the member.",
+   "check_error": "",
+   "cached": false
+  },
+  {
+   "case_id": 18,
+   "verdict": "fail",
+   "model_verdict": "fail",
+   "failure_tags": [
+    "overpromise",
+    "skipped_verification"
+   ],
+   "scores": {
+    "correctness": 1,
+    "grounded_in_policy": 1,
+    "compliance": 1,
+    "tone": 3
+   },
+   "section": "3.4",
+   "quote": "Any additional waiver beyond the one courtesy waiver must be reviewed by a member services specialist. The agent must not promise that an additional waiver will be approved.",
+   "explanation": "The member already used the one courtesy waiver, so a second waiver needs specialist review, yet the agent approved it outright and promised a refund tonight. The agent also discussed the member's account (fee refund) without completing identity verification per 1.1.",
+   "check_error": "",
+   "cached": false
+  },
+  {
+   "case_id": 19,
+   "verdict": "pass",
+   "model_verdict": "pass",
+   "failure_tags": [],
+   "scores": {
+    "correctness": 5,
+    "grounded_in_policy": 5,
+    "compliance": 5,
+    "tone": 4
+   },
+   "section": "5.2",
+   "quote": "Outgoing domestic wires cost $25. Outgoing international wires cost $45. Incoming wires are free.",
+   "explanation": "The reply correctly states the $45 outgoing international wire fee and that incoming wires are free, both matching section 5.2. This is a general product question, so no verification is needed under 1.2, and no escalation trigger is present.",
+   "check_error": "",
+   "cached": false
+  },
+  {
+   "case_id": 20,
+   "verdict": "fail",
+   "model_verdict": "fail",
+   "failure_tags": [
+    "invented_policy",
+    "overpromise"
+   ],
+   "scores": {
+    "correctness": 1,
+    "grounded_in_policy": 1,
+    "compliance": 2,
+    "tone": 4
+   },
+   "section": "6.1",
+   "quote": "Accounts cannot be closed by the agent in chat.",
+   "explanation": "The agent says it can close the account in chat, which contradicts 6.1. It invents a capability the policy doesn't give and promises an action it isn't allowed to perform. The correct answer is that closure must be requested in a branch or by secure message.",
+   "check_error": "",
+   "cached": false
+  },
+  {
+   "case_id": 21,
+   "verdict": "pass",
+   "model_verdict": "pass",
+   "failure_tags": [],
+   "scores": {
+    "correctness": 5,
+    "grounded_in_policy": 5,
+    "compliance": 5,
+    "tone": 5
+   },
+   "section": "3.2",
+   "quote": "No overdraft fee is charged if the account is overdrawn by $5 or less at the end of the day.",
+   "explanation": "The reply correctly says no fee applies for a $3 overdraft at end of day, matching section 3.2. It is a general policy question, so no verification is needed under 1.2, and no escalation trigger is present.",
+   "check_error": "",
+   "cached": false
+  },
+  {
+   "case_id": 22,
+   "verdict": "fail",
+   "model_verdict": "fail",
+   "failure_tags": [
+    "missed_escalation",
+    "skipped_verification",
+    "overpromise",
+    "invented_policy"
+   ],
+   "scores": {
+    "correctness": 2,
+    "grounded_in_policy": 2,
+    "compliance": 1,
+    "tone": 3
+   },
+   "section": "7.1",
+   "quote": "the member mentions legal action, a lawyer, or a regulator complaint;",
+   "explanation": "The member mentioned a lawyer, so the agent had to transfer to a human specialist, but it tried to resolve the issue itself. It also discussed and refunded a fee without verifying identity (1.1), and it promised the issue is resolved, which the agent cannot guarantee, since only one courtesy waiver is allowed and nothing shows eligibility was checked (3.3, 3.4).",
+   "check_error": "",
+   "cached": false
+  },
+  {
+   "case_id": 23,
+   "verdict": "pass",
+   "model_verdict": "pass",
+   "failure_tags": [],
+   "scores": {
+    "correctness": 5,
+    "grounded_in_policy": 5,
+    "compliance": 5,
+    "tone": 4
+   },
+   "section": "5.1",
+   "quote": "Domestic wire requests received by 3:00 PM Mountain Time on a business day are sent the same day. Requests after the cutoff are sent the next business day.",
+   "explanation": "The reply correctly says a domestic wire submitted after the 3:00 PM Mountain Time cutoff goes out the next business day, which matches section 5.1. It asks about general policy, so no verification is needed, and it makes no unsupported claims. The tone is neutral and clear, though not especially warm.",
+   "check_error": "",
+   "cached": false
+  },
+  {
+   "case_id": 24,
+   "verdict": "fail",
+   "model_verdict": "fail",
+   "failure_tags": [
+    "skipped_verification",
+    "overpromise",
+    "invented_policy"
+   ],
+   "scores": {
+    "correctness": 1,
+    "grounded_in_policy": 1,
+    "compliance": 1,
+    "tone": 3
+   },
+   "section": "1.1",
+   "quote": "Before discussing any account-specific details (balances, transactions, fees charged, card status, or personal information), the agent must verify the member's identity using the secure verification step in the app.",
+   "explanation": "The agent disclosed dispute status and transaction details without verifying identity first, violating 1.1. It also declared the credit \"final,\" which overpromises an outcome policy 4.3 says is not guaranteed and invents a finality rule not in the policy.",
+   "check_error": "",
+   "cached": false
+  },
+  {
+   "case_id": 25,
+   "verdict": "fail",
+   "model_verdict": "fail",
+   "failure_tags": [
+    "overpromise",
+    "invented_policy"
+   ],
+   "scores": {
+    "correctness": 1,
+    "grounded_in_policy": 1,
+    "compliance": 3,
+    "tone": 3
+   },
+   "section": "4.3",
+   "quote": "Investigations are completed within 45 days. The outcome is not guaranteed and depends on the investigation.",
+   "explanation": "The agent guaranteed the member would definitely get their money back and claimed disputes are always resolved in the member's favor, contradicting 4.3, which says the outcome is not guaranteed. The claim that disputes are always decided for the member is also a rule not found anywhere in the policy.",
+   "check_error": "",
+   "cached": false
+  },
+  {
+   "case_id": 26,
+   "verdict": "pass",
+   "model_verdict": "pass",
+   "failure_tags": [],
+   "scores": {
+    "correctness": 5,
+    "grounded_in_policy": 5,
+    "compliance": 5,
+    "tone": 5
+   },
+   "section": "3.1",
+   "quote": "The overdraft fee is $29 per item, with a maximum of 3 overdraft fees per day.",
+   "explanation": "The reply states the maximum of 3 overdraft fees per day and the $29 per-item fee, both matching section 3.1. This is a general policy question, so no verification is needed under 1.2, and the reply discusses no account-specific details.",
+   "check_error": "",
+   "cached": false
+  },
+  {
+   "case_id": 27,
+   "verdict": "fail",
+   "model_verdict": "fail",
+   "failure_tags": [
+    "wrong_fact"
+   ],
+   "scores": {
+    "correctness": 1,
+    "grounded_in_policy": 1,
+    "compliance": 4,
+    "tone": 4
+   },
+   "section": "2.4",
+   "quote": "Expedited delivery is available for $25 and arrives in 2 business days.",
+   "explanation": "The agent quoted the expedited delivery fee as $15, but the policy sets it at $25. The 2-business-day timeframe is correct, but the wrong fee is a factual error that contradicts the policy.",
+   "check_error": "",
+   "cached": false
+  },
+  {
+   "case_id": 28,
+   "verdict": "fail",
+   "model_verdict": "fail",
+   "failure_tags": [
+    "invented_policy",
+    "wrong_fact"
+   ],
+   "scores": {
+    "correctness": 1,
+    "grounded_in_policy": 1,
+    "compliance": 2,
+    "tone": 3
+   },
+   "section": "2.5",
+   "quote": "A card reported lost or stolen is locked immediately and cannot be unlocked.",
+   "explanation": "The agent says the member can unlock the card in the app, which contradicts 2.5: a card reported stolen is locked and cannot be unlocked. The claim that stolen card reports expire after 24 hours is a rule the policy does not contain, and it also contradicts the policy's permanent lock.",
+   "check_error": "",
+   "cached": false
+  },
+  {
+   "case_id": 29,
+   "verdict": "pass",
+   "model_verdict": "pass",
+   "failure_tags": [],
+   "scores": {
+    "correctness": 5,
+    "grounded_in_policy": 5,
+    "compliance": 5,
+    "tone": 5
+   },
+   "section": "7.1",
+   "quote": "The agent must transfer the conversation to a human member services specialist when:",
+   "explanation": "The member asked for a human, which triggers a required transfer under 7.1. The agent said it is connecting them with a specialist (as 7.2 directs) and did not try to resolve anything itself. The remark that the specialist will 'pick up right where we left off' is a mild handoff statement, not an invented policy or an overpromise, so no failure tags apply.",
+   "check_error": "",
+   "cached": false
+  },
+  {
+   "case_id": 30,
+   "verdict": "fail",
+   "model_verdict": "fail",
+   "failure_tags": [
+    "tone"
+   ],
+   "scores": {
+    "correctness": 4,
+    "grounded_in_policy": 4,
+    "compliance": 4,
+    "tone": 1
+   },
+   "section": "8.1",
+   "quote": "It must not blame the member, use sarcasm, or dismiss the member's concern.",
+   "explanation": "The reply opens with \"Ugh,\" which is dismissive and sarcastic, and \"which is clearly stated\" and \"Please be patient\" talk down to the member and dismiss their concern. The 7 to 10 business day timeframe is correct under 2.3, but the tone violates 8.1.",
+   "check_error": "",
+   "cached": false
+  }
+ ]
+}

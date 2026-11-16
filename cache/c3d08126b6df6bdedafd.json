@@ -1,0 +1,15 @@
+{
+ "verdict": "fail",
+ "scores": {
+  "correctness": 2,
+  "grounded_in_policy": 1,
+  "compliance": 1,
+  "tone": 3
+ },
+ "failure_tags": [
+  "skipped_verification"
+ ],
+ "section": "1.1",
+ "quote": "Before discussing any account-specific details (balances, transactions, fees charged, card status, or personal information), the agent must verify the member's identity using the secure verification step in the app.",
+ "explanation": "The agent disclosed checking and savings balances without first verifying the member's identity through the app's secure verification step, which section 1.1 requires before sharing any balance. It should have asked the member to verify first."
+}

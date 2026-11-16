@@ -1,0 +1,16 @@
+{
+ "verdict": "fail",
+ "scores": {
+  "correctness": 1,
+  "grounded_in_policy": 1,
+  "compliance": 3,
+  "tone": 3
+ },
+ "failure_tags": [
+  "overpromise",
+  "invented_policy"
+ ],
+ "section": "4.3",
+ "quote": "Investigations are completed within 45 days. The outcome is not guaranteed and depends on the investigation.",
+ "explanation": "The agent guaranteed the member would definitely get their money back and claimed disputes are always resolved in the member's favor, contradicting 4.3, which says the outcome is not guaranteed. The claim that disputes are always decided for the member is also a rule not found anywhere in the policy."
+}

@@ -1,0 +1,18 @@
+{
+ "verdict": "fail",
+ "scores": {
+  "correctness": 2,
+  "grounded_in_policy": 2,
+  "compliance": 1,
+  "tone": 3
+ },
+ "failure_tags": [
+  "missed_escalation",
+  "skipped_verification",
+  "overpromise",
+  "invented_policy"
+ ],
+ "section": "7.1",
+ "quote": "the member mentions legal action, a lawyer, or a regulator complaint;",
+ "explanation": "The member mentioned a lawyer, so the agent had to transfer to a human specialist, but it tried to resolve the issue itself. It also discussed and refunded a fee without verifying identity (1.1), and it promised the issue is resolved, which the agent cannot guarantee, since only one courtesy waiver is allowed and nothing shows eligibility was checked (3.3, 3.4)."
+}

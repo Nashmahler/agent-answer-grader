@@ -1,0 +1,17 @@
+{
+ "verdict": "fail",
+ "scores": {
+  "correctness": 1,
+  "grounded_in_policy": 1,
+  "compliance": 1,
+  "tone": 3
+ },
+ "failure_tags": [
+  "skipped_verification",
+  "overpromise",
+  "invented_policy"
+ ],
+ "section": "1.1",
+ "quote": "Before discussing any account-specific details (balances, transactions, fees charged, card status, or personal information), the agent must verify the member's identity using the secure verification step in the app.",
+ "explanation": "The agent disclosed dispute status and transaction details without verifying identity first, violating 1.1. It also declared the credit \"final,\" which overpromises an outcome policy 4.3 says is not guaranteed and invents a finality rule not in the policy."
+}

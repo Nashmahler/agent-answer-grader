@@ -1,0 +1,13 @@
+{
+ "verdict": "pass",
+ "scores": {
+  "correctness": 5,
+  "grounded_in_policy": 5,
+  "compliance": 5,
+  "tone": 5
+ },
+ "failure_tags": [],
+ "section": "2.5",
+ "quote": "A card that is only misplaced may be temporarily frozen and unfrozen in the app.",
+ "explanation": "The reply correctly says a misplaced card can be frozen and unfrozen in the app, matching 2.5. Its note that a lost or stolen card should be reported so it can be locked and replaced is consistent with 2.1 and 2.5. It states no incorrect numbers, makes no account-specific disclosures, and needs no escalation."
+}

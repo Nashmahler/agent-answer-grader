@@ -1,0 +1,13 @@
+{
+ "verdict": "pass",
+ "scores": {
+  "correctness": 5,
+  "grounded_in_policy": 5,
+  "compliance": 5,
+  "tone": 5
+ },
+ "failure_tags": [],
+ "section": "5.1",
+ "quote": "Domestic wire requests received by 3:00 PM Mountain Time on a business day are sent the same day.",
+ "explanation": "The reply correctly states the 3:00 PM Mountain Time same-day cutoff and the $25 outgoing domestic wire fee (5.2). It makes no account-specific disclosures, so verification isn't needed, and no escalation trigger is present. The tone is friendly and clear."
+}

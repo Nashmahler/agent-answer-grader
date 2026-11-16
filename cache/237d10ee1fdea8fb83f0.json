@@ -1,0 +1,13 @@
+{
+ "verdict": "pass",
+ "scores": {
+  "correctness": 5,
+  "grounded_in_policy": 5,
+  "compliance": 5,
+  "tone": 5
+ },
+ "failure_tags": [],
+ "section": "4.2",
+ "quote": "Provisional credit, if granted, is issued within 10 business days of receiving a complete dispute.",
+ "explanation": "The reply gives the 10-business-day provisional credit window and the 45-day investigation timeline, and says the outcome depends on the investigation (4.2, 4.3). It discusses no account-specific details, so verification isn't needed. It promises nothing the policy doesn't allow, and the tone is respectful."
+}

@@ -1,0 +1,17 @@
+{
+ "verdict": "fail",
+ "scores": {
+  "correctness": 2,
+  "grounded_in_policy": 1,
+  "compliance": 1,
+  "tone": 3
+ },
+ "failure_tags": [
+  "missed_escalation",
+  "invented_policy",
+  "overpromise"
+ ],
+ "section": "7.1",
+ "quote": "the member describes financial hardship, such as job loss, medical emergency, or inability to make loan payments;",
+ "explanation": "The member described job loss and inability to make a loan payment, which requires transfer to a human specialist under 7.1, but the agent tried to resolve it itself and did not transfer. It also invented a capability (noting the loan to avoid collections, suggesting a smaller payment) and promised an outcome the policy does not support."
+}

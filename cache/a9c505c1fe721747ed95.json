@@ -1,0 +1,13 @@
+{
+ "verdict": "pass",
+ "scores": {
+  "correctness": 5,
+  "grounded_in_policy": 5,
+  "compliance": 5,
+  "tone": 5
+ },
+ "failure_tags": [],
+ "section": "2.5",
+ "quote": "A card reported lost or stolen is locked immediately and cannot be unlocked.",
+ "explanation": "The reply's facts match the policy: $10 fee, waived once per calendar year with Premier Checking, 7 to 10 business days standard, $25 for 2-day expedited, and the lost card is locked. It shares no account-specific details, needs no escalation, and the tone is courteous."
+}

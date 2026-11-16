@@ -1,0 +1,17 @@
+{
+ "verdict": "fail",
+ "scores": {
+  "correctness": 1,
+  "grounded_in_policy": 1,
+  "compliance": 2,
+  "tone": 3
+ },
+ "failure_tags": [
+  "invented_policy",
+  "overpromise",
+  "wrong_fact"
+ ],
+ "section": "5.3",
+ "quote": "Wires cannot be recalled or cancelled once sent. The agent must not tell a member a sent wire can be reversed.",
+ "explanation": "The agent told the member the wire can be reversed through a recall request and that the money would return within 2 business days. This contradicts 5.3, invents a recall capability and timeline, and promises an outcome the agent cannot deliver."
+}

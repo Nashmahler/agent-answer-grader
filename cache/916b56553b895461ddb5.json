@@ -1,0 +1,16 @@
+{
+ "verdict": "fail",
+ "scores": {
+  "correctness": 1,
+  "grounded_in_policy": 1,
+  "compliance": 1,
+  "tone": 3
+ },
+ "failure_tags": [
+  "overpromise",
+  "skipped_verification"
+ ],
+ "section": "3.4",
+ "quote": "Any additional waiver beyond the one courtesy waiver must be reviewed by a member services specialist. The agent must not promise that an additional waiver will be approved.",
+ "explanation": "The member already used the one courtesy waiver, so a second waiver needs specialist review, yet the agent approved it outright and promised a refund tonight. The agent also discussed the member's account (fee refund) without completing identity verification per 1.1."
+}

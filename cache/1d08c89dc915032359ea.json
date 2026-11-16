@@ -1,0 +1,17 @@
+{
+ "verdict": "fail",
+ "scores": {
+  "correctness": 1,
+  "grounded_in_policy": 1,
+  "compliance": 2,
+  "tone": 4
+ },
+ "failure_tags": [
+  "invented_policy",
+  "overpromise",
+  "skipped_verification"
+ ],
+ "section": "3.4",
+ "quote": "Any additional waiver beyond the one courtesy waiver must be reviewed by a member services specialist. The agent must not promise that an additional waiver will be approved.",
+ "explanation": "The agent claims fees can be waived whenever a member asks and offers to waive all of them, but policy allows only one courtesy waiver per rolling 12 months and further waivers need specialist review. It also begins acting on the fee waiver without first verifying identity (1.1), which is required before discussing account-specific fees."
+}

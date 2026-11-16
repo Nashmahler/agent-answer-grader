@@ -1,0 +1,13 @@
+{
+ "verdict": "pass",
+ "scores": {
+  "correctness": 5,
+  "grounded_in_policy": 5,
+  "compliance": 5,
+  "tone": 5
+ },
+ "failure_tags": [],
+ "section": "6.1",
+ "quote": "Members can request to close an account in a branch or by secure message.",
+ "explanation": "The reply matches sections 6.1-6.3: closing via branch or secure message, remaining balance sent by check to the address on file within 10 business days, and a negative balance must be brought to zero first. It asks for no account-specific details, so verification isn't triggered, and its tone is clear and respectful."
+}
