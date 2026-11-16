@@ -1,0 +1,48 @@
+name: Grade the agent
+
+on:
+  workflow_dispatch:
+    inputs:
+      rubric:
+        description: "Rubric file"
+        default: "rubric.md"
+        required: true
+      label:
+        description: "Name for this run (v1, v2, ...)"
+        default: "v1"
+        required: true
+
+permissions:
+  contents: write
+
+concurrency:
+  group: grade
+  cancel-in-progress: false
+
+jobs:
+  grade:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+      - run: pip install -r requirements.txt
+      - name: Grade (max 40 Claude calls; cached results are free)
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          RUBRIC: ${{ inputs.rubric }}
+          LABEL: ${{ inputs.label }}
+        run: python grade.py --rubric "$RUBRIC" --label "$LABEL"
+      # Automated run output only. Nash's own commits are authored as Nash (see CLAUDE.md).
+      - name: Save results and report
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898583+github-actions[bot]@users.noreply.github.com"
+          git add results cache docs
+          if git diff --cached --quiet; then echo "nothing to save"; exit 0; fi
+          git commit -m "grade: ${{ inputs.label }}"
+          git pull --rebase origin "${GITHUB_REF_NAME}"
+          git push origin "HEAD:${GITHUB_REF_NAME}"
