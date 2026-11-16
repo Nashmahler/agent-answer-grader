@@ -25,6 +25,11 @@ def score(cases: list[Case], verdicts: list[Verdict]) -> dict:
         "fail_recall_pct": _pct(sum(v.verdict == "fail" for _, v in bad), len(bad)),
         "false_alarms": sum(v.verdict == "fail" for _, v in good), "good_total": len(good),
         "needs_review": sum(v.verdict == "needs_review" for _, v in graded),
+        # Naming the problem: of the bad answers the judge failed, how many got exactly my tags?
+        "tags_exact": sum(v.verdict == "fail" and set(v.failure_tags) == set(c.my_failure_tags) for c, v in bad),
+        "tags_exact_pct": _pct(sum(v.verdict == "fail" and set(v.failure_tags) == set(c.my_failure_tags) for c, v in bad),
+                               sum(v.verdict == "fail" for _, v in bad)),
+        "extra_tags": sum(len(set(v.failure_tags) - set(c.my_failure_tags)) for c, v in bad if v.verdict == "fail"),
         "by_tag": {},
         "disagreements": [],
     }

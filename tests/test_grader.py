@@ -152,3 +152,10 @@ def test_grade_cli_writes_results_and_report(tmp_path):
     html = (tmp_path / "docs/index.html").read_text()
     assert rc == 0 and data["metrics"]["all"]["agreement_pct"] == 100.0 and data["calls_used"] == 30
     assert "100%" in html and "Harbor Peak" in html and "fictional" in html
+
+
+def test_tag_precision_counts_exact_matches_and_extras():
+    cases = [Case(1, "q", "r", "a", "fail", ["overpromise"]), Case(2, "q", "r", "a", "fail", ["tone"])]
+    verdicts = [_v(1, "fail", ["overpromise", "invented_policy", "wrong_fact"]), _v(2, "fail", ["tone"])]
+    m = metrics.score(cases, verdicts)
+    assert (m["tags_exact"], m["tags_exact_pct"], m["extra_tags"]) == (1, 50.0, 2)

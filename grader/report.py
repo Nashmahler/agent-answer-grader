@@ -32,7 +32,9 @@ def render(runs: list[dict], cases: list[Case]) -> str:
         f"<tr><td>{_e(r['label'])}</td><td>{_pct(r['metrics']['all']['agreement_pct'])}</td>"
         f"<td>{_pct(r['metrics']['held_out']['agreement_pct'])}</td>"
         f"<td>{r['metrics']['all']['bad_caught']}/{r['metrics']['all']['bad_total']}</td>"
-        f"<td>{r['metrics']['all']['false_alarms']}</td><td>{r['metrics']['all']['needs_review']}</td></tr>"
+        f"<td>{r['metrics']['all']['false_alarms']}</td>"
+        f"<td>{r['metrics']['all'].get('tags_exact', 'n/a')}/{r['metrics']['all']['bad_caught']}</td>"
+        f"<td>{r['metrics']['all'].get('extra_tags', 'n/a')}</td><td>{r['metrics']['all']['needs_review']}</td></tr>"
         for r in runs)
     tag_rows = "".join(
         f"<tr><td>{_e(pretty[t])}</td><td>{d['caught']}/{d['cases']}</td><td>{d['tag_matched']}/{d['cases']}</td></tr>"
@@ -86,7 +88,7 @@ p{{margin:4px 0}} .k{{font-weight:600;color:#555;margin-right:4px}} .ev{{font-si
 <div class="stat"><b>{a['false_alarms']}</b><span>good answers wrongly failed</span></div>
 </div>
 <h2>Before and after one rubric change</h2>
-<table><tr><th>Version</th><th>Agreement</th><th>Held-out</th><th>Bad caught</th><th>False alarms</th><th>Needs review</th></tr>{rows_ba}</table>
+<table><tr><th>Version</th><th>Agreement</th><th>Held-out</th><th>Bad caught</th><th>False alarms</th><th>Tags exactly right</th><th>Extra tags</th><th>Needs review</th></tr>{rows_ba}</table>
 <p class="note">I changed the rubric once, using only the 20 tuning cases. The 10 held-out cases were never used for tuning, so their score is the honest one.</p>
 <h2>By failure type</h2>
 <table><tr><th>Problem planted</th><th>Caught (failed)</th><th>Named correctly</th></tr>{tag_rows}</table>
