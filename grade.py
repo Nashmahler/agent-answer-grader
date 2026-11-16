@@ -47,6 +47,8 @@ def main(argv=None, llm=None, root: Path = Path(".")) -> int:
     runs = [json.loads(p.read_text()) for p in sorted(results_dir.glob("*.json"))] if results_dir.exists() else []
     if runs:
         cases = core.load_cases(root / "data/cases.csv")
+        for r in runs:  # recompute from saved verdicts, so older runs get any newer metrics too
+            r["metrics"] = metrics.by_split(cases, [core.Verdict(**v) for v in r["verdicts"]])
         (root / "docs").mkdir(exist_ok=True)
         (root / "docs/index.html").write_text(report.render(runs, cases))
         print("wrote docs/index.html")
